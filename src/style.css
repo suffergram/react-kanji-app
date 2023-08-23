@@ -1,0 +1,16 @@
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #334, #222);
+  color: white;
+}
+
+#root {
+  width: 100%;
+  min-width: 100vh;
+}
+
+h1 {
+  margin: 0;
+}
