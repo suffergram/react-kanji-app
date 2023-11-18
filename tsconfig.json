@@ -6,8 +6,9 @@
     "allowJs": true,
     "checkJs": false,
     "outDir": "./",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "lib": ["es2022", "dom"]
   },
   "include": ["src"],
-  "exclude": ["node_modules", "./webpack.config.js"]
+  "exclude": ["node_modules", "./lint-staged.config.js", "./webpack.config.js"]
 }

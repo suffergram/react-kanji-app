@@ -1,2 +1,4 @@
 build
 *.config.js
+list.ts
+listKanji.ts

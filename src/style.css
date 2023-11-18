@@ -1,14 +1,25 @@
+@font-face {
+  font-family: 'RaleWay';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Raleway.woff2') format('woff2');
+  font-display: swap;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, #334, #222);
+  font-family: 'Raleway';
   color: white;
 }
 
 #root {
-  width: 100%;
-  min-width: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
