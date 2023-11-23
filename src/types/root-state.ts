@@ -1,12 +1,14 @@
 import { AnswerType } from './answer-type';
-import { VocabType } from './vocab-type';
+import { QuizPoolType } from './quiz-pool-type';
 
 export type RootState = {
   quizState: {
     isLoading: boolean;
     isOngoing: boolean;
+    isResulting: boolean;
     answers: AnswerType[];
-    current: VocabType | null;
+    pool: QuizPoolType[];
+    current: QuizPoolType | null;
     amount: number;
     kanjiLevel: number;
     vocabLevel: number;

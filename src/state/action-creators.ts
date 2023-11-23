@@ -1,24 +1,33 @@
 import { AnswerType } from '../types/answer-type';
-import { VocabType } from '../types/vocab-type';
+import { QuizPoolType } from '../types/quiz-pool-type';
 import { QuizActions } from './constants';
 
-export const handleStartQuizAction = (amount: number) => ({
+export const handleStartQuizAction = (
+  amount: number,
+  pool: QuizPoolType[]
+) => ({
   type: QuizActions.HandleStartQuiz,
-  payload: amount,
+  payload: {
+    amount,
+    pool,
+  },
 });
 
 export const handleEndQuizAction = () => ({
   type: QuizActions.HandleEndQuiz,
 });
 
-export const handleNewQuestionAction = (question: VocabType) => ({
+export const handleNewQuestionAction = () => ({
   type: QuizActions.HandleNewQuestion,
-  payload: question,
 });
 
 export const handleSubmitAnswerAction = (answer: AnswerType) => ({
   type: QuizActions.HandleSubmitAnswer,
   payload: answer,
+});
+
+export const handleQuizResultAction = () => ({
+  type: QuizActions.HandleQuizResult,
 });
 
 export const handleKanjiLevelAction = (level: number) => ({

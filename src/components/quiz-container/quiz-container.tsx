@@ -3,63 +3,66 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { Card } from '../card/card';
-import { getRandomCard } from '../../services/get-random-card';
 import { RootState } from '../../types/root-state';
 import { handleEndQuizAction } from '../../state/action-creators';
-import { VocabType } from '../../types/vocab-type';
 import { submitAnswer } from '../../state/submit-answer';
 import { AnswerType } from '../../types/answer-type';
+import { QuizResult } from '../quiz-result/quiz-result';
 
 export function QuizContainer() {
-  const {
-    current, kanjiLevel, vocabLevel, amount,
-  } = useSelector(
-    (state: RootState) => state.quizState,
+  const { current, amount, isResulting } = useSelector(
+    (state: RootState) => state.quizState
   );
 
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
-  const handleNewQuesiton = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmitOption = (event: MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
 
-    const answer: AnswerType = {
-      card: current as VocabType,
-      answer: target.value,
-      isRight: current?.kana === target.value,
-    };
+    if (current) {
+      const answer: AnswerType = {
+        card: current.question,
+        answer: current.options.filter(
+          (option) => option.id === Number(target.id)
+        )[0],
+        isRight: current.question.id === Number(target.id),
+      };
 
-    dispatch(submitAnswer(answer, kanjiLevel, vocabLevel, amount));
+      dispatch(submitAnswer(answer, amount));
+    }
   };
 
   const handleEndQuiz = () => {
     dispatch(handleEndQuizAction());
   };
 
-  const options: VocabType[] = [current as VocabType];
-  for (let i = 0; i < 3; i += 1) {
-    options.push(getRandomCard(kanjiLevel, vocabLevel));
-  }
+  const currentQuestion = current && [current.question, ...current.options];
 
   return (
     <>
-      <Card cardData={current} />
-      <div>
-        {options
-          .sort((a, b) => a.id - b.id)
-          .map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              value={option.kana}
-              onClick={handleNewQuesiton}
-            >
-              {option.kana}
-            </button>
-          ))}
-      </div>
-      <button type="button" value="TEST" onClick={handleNewQuesiton}>
-        Get new card
-      </button>
+      {isResulting ? (
+        <QuizResult />
+      ) : (
+        <>
+          <Card cardData={current?.question} />
+          <div>
+            {currentQuestion &&
+              currentQuestion
+                .sort((a, b) => a.id - b.id)
+                .map((option) => (
+                  <button
+                    key={option.id}
+                    id={option.id.toString()}
+                    type="button"
+                    value={option.kana}
+                    onClick={handleSubmitOption}
+                  >
+                    {option.kana}
+                  </button>
+                ))}
+          </div>
+        </>
+      )}
       <button type="button" onClick={handleEndQuiz}>
         End the quiz
       </button>

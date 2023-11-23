@@ -7,7 +7,7 @@ import {
   handleNewQuestionAction,
   handleStartQuizAction,
 } from './action-creators';
-import { getRandomCard } from '../services/get-random-card';
+import { getQuizPool } from '../services/get-quiz-pool';
 
 export const startQuiz =
   (
@@ -18,8 +18,13 @@ export const startQuiz =
   (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
     try {
       dispatch(handleLoadingAction());
-      dispatch(handleStartQuizAction(amount));
-      dispatch(handleNewQuestionAction(getRandomCard(kanjiLevel, vocabLevel)));
+      dispatch(
+        handleStartQuizAction(
+          amount,
+          getQuizPool(amount, kanjiLevel, vocabLevel)
+        )
+      );
+      dispatch(handleNewQuestionAction());
     } catch (error: unknown) {
       dispatch(handleErrorAction(error as string));
     }

@@ -2,7 +2,7 @@ import { VocabType } from '../../types/vocab-type';
 import { StyledCard } from './style';
 
 type CardProps = {
-  cardData: VocabType | null;
+  cardData: VocabType | undefined;
 };
 
 export function Card({ cardData }: CardProps) {
