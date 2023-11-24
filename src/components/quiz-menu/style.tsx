@@ -4,14 +4,15 @@ import { Slider } from '@mui/material';
 export const StyledForm = styled.form`
   height: 20rem;
   width: 20rem;
-  padding: 2rem;
+
+  @media (max-width: 21rem) {
+    width: 95vw;
+  }
 `;
 
 export const MenuTitle = styled.h1`
   margin-bottom: 2rem;
 `;
-
-export const MenuLabel = styled.label``;
 
 export const StyledSlider = styled(Slider)(() => ({
   height: 2,

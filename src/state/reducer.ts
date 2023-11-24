@@ -10,7 +10,7 @@ const initialState: RootState = {
     answers: [],
     pool: [],
     current: null,
-    amount: 0,
+    amount: 5,
     kanjiLevel: 5,
     vocabLevel: 5,
     error: undefined,

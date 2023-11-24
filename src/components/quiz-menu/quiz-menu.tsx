@@ -7,14 +7,12 @@ import {
   handleKanjiLevelAction,
   handleVocabLevelAction,
 } from '../../state/action-creators';
-import {
-  MenuLabel, MenuTitle, StyledForm, StyledSlider,
-} from './style';
+import { MenuTitle, StyledForm, StyledSlider } from './style';
 import { startQuiz } from '../../state/start-quiz';
 
 export function QuizMenu() {
   const { kanjiLevel, vocabLevel } = useSelector(
-    (state: RootState) => state.quizState,
+    (state: RootState) => state.quizState
   );
 
   const levels: Record<number, number> = {
@@ -29,14 +27,14 @@ export function QuizMenu() {
 
   const handleKanjiLevelChange = (
     event: Event,
-    newValue: number | number[],
+    newValue: number | number[]
   ) => {
     dispatch(handleKanjiLevelAction(levels[newValue as number]));
   };
 
   const handleVocabLevelChange = (
     event: Event,
-    newValue: number | number[],
+    newValue: number | number[]
   ) => {
     dispatch(handleVocabLevelAction(levels[newValue as number]));
   };
@@ -49,9 +47,8 @@ export function QuizMenu() {
   return (
     <StyledForm>
       <MenuTitle>Quiz preferences</MenuTitle>
-      <MenuLabel>
-        Kanji N
-        {kanjiLevel}
+      <label>
+        Kanji N{kanjiLevel}
         <StyledSlider
           min={1}
           max={5}
@@ -60,10 +57,9 @@ export function QuizMenu() {
           marks
           onChange={handleKanjiLevelChange}
         />
-      </MenuLabel>
-      <MenuLabel>
-        Vocab N
-        {vocabLevel}
+      </label>
+      <label>
+        Vocab N{vocabLevel}
         <StyledSlider
           min={1}
           max={5}
@@ -72,7 +68,7 @@ export function QuizMenu() {
           marks
           onChange={handleVocabLevelChange}
         />
-      </MenuLabel>
+      </label>
       <button type="submit" onClick={handleSubmit}>
         Start
       </button>

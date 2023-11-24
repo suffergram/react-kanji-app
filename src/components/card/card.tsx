@@ -1,5 +1,5 @@
 import { VocabType } from '../../types/vocab-type';
-import { StyledCard } from './style';
+import { StyledCard, StyledHeading } from './style';
 
 type CardProps = {
   cardData: VocabType | undefined;
@@ -8,12 +8,7 @@ type CardProps = {
 export function Card({ cardData }: CardProps) {
   return (
     <StyledCard>
-      <h2>{cardData?.kanji}</h2>
-      {/* <p>{cardData?.kana}</p> */}
-      {/* <p>{cardData?.meaning}</p> */}
-      <p>
-        {cardData?.id} N{cardData?.jlpt}
-      </p>
+      <StyledHeading>{cardData?.kanji}</StyledHeading>
     </StyledCard>
   );
 }

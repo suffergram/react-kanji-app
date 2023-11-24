@@ -36,6 +36,7 @@ module.exports = {
     "no-shadow": "off",
     "@typescript-eslint/no-var-requires": "off",
     "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/label-has-associated-control": "off",
   },
   root: true,
   settings: {

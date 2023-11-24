@@ -3,6 +3,6 @@ export type VocabType = {
   jlpt: number;
   kanji: string;
   meaning: string;
-  kana: string | string[];
-  romaji: string | string[];
+  kana: string;
+  romaji: string;
 };

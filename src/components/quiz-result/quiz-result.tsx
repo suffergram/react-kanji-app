@@ -8,7 +8,7 @@ export function QuizResult() {
     <>
       {answers.map((item) => (
         <p key={item.card.kanji}>
-          {item.card.kanji} - {item.isRight ? 'right' : 'wrong'}
+          {item.card.kanji} - {item.isRight ? '◯' : '✕'}
         </p>
       ))}
     </>

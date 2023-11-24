@@ -8,6 +8,7 @@ import { handleEndQuizAction } from '../../state/action-creators';
 import { submitAnswer } from '../../state/submit-answer';
 import { AnswerType } from '../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
+import { CardOptions, CloseButton } from './style';
 
 export function QuizContainer() {
   const { current, amount, isResulting } = useSelector(
@@ -22,7 +23,7 @@ export function QuizContainer() {
     if (current) {
       const answer: AnswerType = {
         card: current.question,
-        answer: current.options.filter(
+        answer: [current.question, ...current.options].filter(
           (option) => option.id === Number(target.id)
         )[0],
         isRight: current.question.id === Number(target.id),
@@ -41,31 +42,44 @@ export function QuizContainer() {
   return (
     <>
       {isResulting ? (
-        <QuizResult />
+        <>
+          <QuizResult />
+          <button type="button" onClick={handleEndQuiz}>
+            {' '}
+            Return to menu{' '}
+          </button>
+        </>
       ) : (
         <>
           <Card cardData={current?.question} />
-          <div>
+          <CardOptions>
             {currentQuestion &&
               currentQuestion
                 .sort((a, b) => a.id - b.id)
-                .map((option) => (
-                  <button
-                    key={option.id}
-                    id={option.id.toString()}
-                    type="button"
-                    value={option.kana}
-                    onClick={handleSubmitOption}
-                  >
-                    {option.kana}
-                  </button>
-                ))}
-          </div>
+                .map((option) => {
+                  const optionValues = option.kana.split('; ');
+                  const value =
+                    optionValues.length > 1
+                      ? optionValues[Math.round(Math.random())]
+                      : optionValues[0];
+                  return (
+                    <button
+                      key={option.id}
+                      id={option.id.toString()}
+                      type="button"
+                      value={value}
+                      onClick={handleSubmitOption}
+                    >
+                      {value}
+                    </button>
+                  );
+                })}
+          </CardOptions>
         </>
       )}
-      <button type="button" onClick={handleEndQuiz}>
-        End the quiz
-      </button>
+      <CloseButton type="button" onClick={handleEndQuiz}>
+        ✕
+      </CloseButton>
     </>
   );
 }

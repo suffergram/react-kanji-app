@@ -1,9 +1,8 @@
+import { OPTIONS_AMOUNT } from '../data/constants/constants';
 import { kanji } from '../data/kanji/kanji';
 import { vocab } from '../data/vocab/vocab';
 import { QuizPoolType } from '../types/quiz-pool-type';
 import { VocabType } from '../types/vocab-type';
-
-const OPTIONS_AMOUNT = 4; // TODO: move the constant to its own file
 
 export function getQuizPool(
   amount: number,
@@ -16,37 +15,44 @@ export function getQuizPool(
     .filter((item) => item.jlpt === kanjiLevel)
     .map((item) => item.kanji);
 
-  let poolVocabArray: VocabType[] = vocab.filter(
+  const poolVocabArray: VocabType[] = vocab.filter(
     (word) =>
       word.jlpt === vocabLevel &&
       word.kanji.split('').every((item) => poolKanjiArray.includes(item))
   );
 
-  for (let i = 0; i < amount; i += 1) {
+  let currentAmount = 0;
+
+  while (currentAmount < amount) {
     const randomIndex = Math.floor(Math.random() * poolVocabArray.length);
-    const current: QuizPoolType = {
-      question: poolVocabArray[randomIndex],
-      options: [],
-    };
 
-    poolVocabArray = [
-      ...poolVocabArray.slice(0, randomIndex),
-      ...poolVocabArray.slice(randomIndex + 1),
-    ];
+    if (
+      pool.every((item) => item.question.id !== poolVocabArray[randomIndex].id)
+    ) {
+      currentAmount += 1;
 
-    let option = 1;
+      const current: QuizPoolType = {
+        question: poolVocabArray[randomIndex],
+        options: [],
+      };
 
-    while (option < OPTIONS_AMOUNT) {
-      const randomOptionNumber = Math.floor(
-        Math.random() * poolVocabArray.length
-      );
-      if (!current.options.includes(poolVocabArray[randomOptionNumber])) {
-        current.options.push(poolVocabArray[randomOptionNumber]);
-        option += 1;
+      let option = 1;
+
+      while (option < OPTIONS_AMOUNT) {
+        const randomOption = Math.floor(Math.random() * poolVocabArray.length);
+        if (
+          randomOption !== randomIndex &&
+          current.options.every(
+            (item) => item.id !== poolVocabArray[randomOption].id
+          )
+        ) {
+          current.options.push(poolVocabArray[randomOption]);
+          option += 1;
+        }
       }
-    }
 
-    pool.push(current);
+      pool.push(current);
+    }
   }
 
   return pool;

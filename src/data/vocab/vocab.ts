@@ -2177,8 +2177,8 @@ export const vocab: VocabType[] = [
     jlpt: 5,
     kanji: '毎年',
     meaning: 'every year; yearly; annually',
-    kana: ['まいとし', 'まいねん'],
-    romaji: ['maitoshi', 'mainen'],
+    kana: 'まいとし; まいねん',
+    romaji: 'maitoshi; mainen',
   },
   {
     id: 272,
@@ -4138,8 +4138,8 @@ export const vocab: VocabType[] = [
     jlpt: 5,
     kanji: '良い',
     meaning: 'good',
-    kana: ['よい', 'いい'],
-    romaji: ['yoi', 'ii'],
+    kana: 'よい; いい',
+    romaji: 'yoi; ii',
   },
   {
     id: 518,
