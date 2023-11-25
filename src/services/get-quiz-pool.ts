@@ -12,12 +12,12 @@ export function getQuizPool(
   const pool: QuizPoolType[] = [];
 
   const poolKanjiArray: string[] = kanji
-    .filter((item) => item.jlpt === kanjiLevel)
+    .filter((item) => item.jlpt >= kanjiLevel)
     .map((item) => item.kanji);
 
   const poolVocabArray: VocabType[] = vocab.filter(
     (word) =>
-      word.jlpt === vocabLevel &&
+      word.jlpt >= vocabLevel &&
       word.kanji.split('').every((item) => poolKanjiArray.includes(item))
   );
 
