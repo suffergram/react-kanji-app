@@ -37,6 +37,8 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
   },
   root: true,
   settings: {

@@ -8,7 +8,8 @@ import { handleEndQuizAction } from '../../state/action-creators';
 import { submitAnswer } from '../../state/submit-answer';
 import { AnswerType } from '../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
-import { CardOptions, CloseButton } from './style';
+import { CardOptions, CardOptionsContainer, CloseButton } from './style';
+import { Button } from '../button/button';
 
 export function QuizContainer() {
   const { current, amount, isResulting } = useSelector(
@@ -42,39 +43,36 @@ export function QuizContainer() {
   return (
     <>
       {isResulting ? (
-        <>
-          <QuizResult />
-          <button type="button" onClick={handleEndQuiz}>
-            {' '}
-            Return to menu{' '}
-          </button>
-        </>
+        <QuizResult />
       ) : (
         <>
           <Card cardData={current?.question} />
-          <CardOptions>
-            {currentQuestion &&
-              currentQuestion
-                .sort((a, b) => a.id - b.id)
-                .map((option) => {
-                  const optionValues = option.kana.split('; ');
-                  const value =
-                    optionValues.length > 1
-                      ? optionValues[Math.round(Math.random())]
-                      : optionValues[0];
-                  return (
-                    <button
-                      key={option.id}
-                      id={option.id.toString()}
-                      type="button"
-                      value={value}
-                      onClick={handleSubmitOption}
-                    >
-                      {value}
-                    </button>
-                  );
-                })}
-          </CardOptions>
+          <CardOptionsContainer>
+            <CardOptions>
+              {currentQuestion &&
+                currentQuestion
+                  .sort((a, b) => a.id - b.id)
+                  .map((option) => {
+                    const optionValues = option.kana.split('; ');
+                    const value =
+                      optionValues.length > 1
+                        ? optionValues[Math.round(Math.random())]
+                        : optionValues[0];
+                    return (
+                      <Button
+                        key={option.id}
+                        id={option.id.toString()}
+                        type="button"
+                        value={value}
+                        variant="secondary"
+                        onClick={handleSubmitOption}
+                      >
+                        {value}
+                      </Button>
+                    );
+                  })}
+            </CardOptions>
+          </CardOptionsContainer>
         </>
       )}
       <CloseButton type="button" onClick={handleEndQuiz}>
