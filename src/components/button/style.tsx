@@ -19,9 +19,9 @@ export const StyledButton = styled.button<{ $variant?: string }>`
       case 'primary':
         return css`
           color: #223;
-          background-color: #445;
+          background-color: #889;
           border: none;
-          box-shadow: 0 0.25rem #334;
+          box-shadow: 0 0.25rem #556;
 
           &:active {
             position: relative;
@@ -31,10 +31,10 @@ export const StyledButton = styled.button<{ $variant?: string }>`
         `;
       case 'secondary':
         return css`
-          color: #889;
+          color: #aab;
           background-color: transparent;
-          border: 0.125rem solid #445;
-          box-shadow: 0 0.125rem #445;
+          border: 0.125rem solid #889;
+          box-shadow: 0 0.125rem #889;
 
           &:active {
             position: relative;
