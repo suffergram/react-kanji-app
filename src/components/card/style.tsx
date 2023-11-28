@@ -16,3 +16,14 @@ export const StyledHeading = styled.h2`
     font-weight: normal;
   }
 `;
+
+export const CardOptionsContainer = styled.div`
+  flex: 1;
+`;
+
+export const CardOptions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+`;

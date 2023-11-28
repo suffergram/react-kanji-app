@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyledButton } from './style';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -5,10 +6,15 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary';
 };
 
-export function Button({ value, variant, ...delegatedProps }: ButtonProps) {
-  return (
-    <StyledButton type="button" $variant={variant} {...delegatedProps}>
-      {value.toUpperCase()}
-    </StyledButton>
-  );
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ value, variant, ...delegatedProps }, ref) => (
+      <StyledButton
+        ref={ref}
+        type="button"
+        $variant={variant}
+        {...delegatedProps}
+      >
+        {value.toUpperCase()}
+      </StyledButton>
+    )
+);
