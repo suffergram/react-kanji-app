@@ -9,6 +9,7 @@ import {
 import { Menu, MenuTitle, StyledSection, StyledSlider } from './style';
 import { startQuiz } from '../../state/start-quiz';
 import { Button } from '../button/button';
+import { QUIZ_AMOUNT } from '../../data/constants/constants';
 
 export function QuizMenu() {
   const { kanjiLevel, vocabLevel } = useSelector(
@@ -40,7 +41,7 @@ export function QuizMenu() {
   };
 
   const handleSubmit = () => {
-    dispatch(startQuiz(kanjiLevel, vocabLevel, 5));
+    dispatch(startQuiz(kanjiLevel, vocabLevel, QUIZ_AMOUNT));
   };
 
   return (

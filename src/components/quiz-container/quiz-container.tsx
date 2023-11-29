@@ -10,6 +10,7 @@ import { AnswerType } from '../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
 import { CardOptions, CardOptionsContainer, CloseButton } from './style';
 import { Button } from '../button/button';
+import { QuizIndicator } from '../quiz-indicator/quiz-indicator';
 
 export function QuizContainer() {
   const { current, amount, isResulting } = useSelector(
@@ -46,7 +47,11 @@ export function QuizContainer() {
         <QuizResult />
       ) : (
         <>
-          <Card cardData={current?.question} />
+          <QuizIndicator />
+          <Card
+            cardData={current?.question}
+            kanjiLevels={current?.kanjiLevels}
+          />
           <CardOptionsContainer>
             <CardOptions>
               {currentQuestion &&

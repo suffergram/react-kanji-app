@@ -34,6 +34,7 @@ export function getQuizPool(
       const current: QuizPoolType = {
         question: poolVocabArray[randomIndex],
         options: [],
+        kanjiLevels: [],
       };
 
       let option = 1;
@@ -50,6 +51,16 @@ export function getQuizPool(
           option += 1;
         }
       }
+
+      current.kanjiLevels.push(
+        ...current.question.kanji
+          .split('')
+          .map(
+            (item) =>
+              kanji.filter((currentKanji) => currentKanji.kanji === item)[0]
+                .jlpt
+          )
+      );
 
       pool.push(current);
     }

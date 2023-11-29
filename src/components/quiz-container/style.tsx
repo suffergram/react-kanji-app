@@ -13,7 +13,7 @@ export const CardOptions = styled.div`
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 5rem;
+  top: 2rem;
   right: 2rem;
   border: none;
   background: none;
@@ -21,7 +21,7 @@ export const CloseButton = styled.button`
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
-  opacity: 0.3;
+  opacity: 0.2;
 
   &:hover {
     opacity: 0.6;
