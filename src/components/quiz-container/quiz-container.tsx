@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -8,7 +8,12 @@ import { handleEndQuizAction } from '../../state/action-creators';
 import { submitAnswer } from '../../state/submit-answer';
 import { AnswerType } from '../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
-import { CardOptions, CardOptionsContainer, CloseButton } from './style';
+import {
+  CardOptions,
+  CardOptionsContainer,
+  CloseButton,
+  Loader,
+} from './style';
 import { Button } from '../button/button';
 import { QuizIndicator } from '../quiz-indicator/quiz-indicator';
 
@@ -19,8 +24,16 @@ export function QuizContainer() {
 
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
+  const [disabledOption, setDisabledOption] = useState(false);
+
+  useEffect(() => {
+    setDisabledOption(false);
+  }, [current]);
+
   const handleSubmitOption = (event: MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
+
+    setDisabledOption(true);
 
     if (current) {
       const answer: AnswerType = {
@@ -48,6 +61,7 @@ export function QuizContainer() {
       ) : (
         <>
           <QuizIndicator />
+          {disabledOption && <Loader />}
           <Card
             cardData={current?.question}
             kanjiLevels={current?.kanjiLevels}
@@ -71,6 +85,7 @@ export function QuizContainer() {
                         value={value}
                         variant="secondary"
                         onClick={handleSubmitOption}
+                        disabled={disabledOption}
                       >
                         {value}
                       </Button>

@@ -8,6 +8,7 @@ import {
   handleSubmitAnswerAction,
 } from './action-creators';
 import { AnswerType } from '../types/answer-type';
+import { CARD_TIMER } from '../data/constants/constants';
 
 export const submitAnswer =
   (
@@ -17,8 +18,10 @@ export const submitAnswer =
   (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
     try {
       dispatch(handleSubmitAnswerAction(answer));
-      if (amount > 0) dispatch(handleNewQuestionAction());
-      else dispatch(handleQuizResultAction());
+      setTimeout(() => {
+        if (amount > 0) dispatch(handleNewQuestionAction());
+        else dispatch(handleQuizResultAction());
+      }, CARD_TIMER);
     } catch (error: unknown) {
       dispatch(handleErrorAction(error as string));
     }
