@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -16,6 +16,7 @@ import {
 } from './style';
 import { Button } from '../button/button';
 import { QuizIndicator } from '../quiz-indicator/quiz-indicator';
+import { CARD_TIMER } from '../../data/constants/constants';
 
 export function QuizContainer() {
   const { current, amount, isResulting } = useSelector(
@@ -26,8 +27,14 @@ export function QuizContainer() {
 
   const [disabledOption, setDisabledOption] = useState(false);
 
+  const timeoutId = useRef<ReturnType<typeof setTimeout>>();
+
   useEffect(() => {
     setDisabledOption(false);
+
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
   }, [current]);
 
   const handleSubmitOption = (event: MouseEvent<HTMLButtonElement>) => {
@@ -44,7 +51,9 @@ export function QuizContainer() {
         isRight: current.question.id === Number(target.id),
       };
 
-      dispatch(submitAnswer(answer, amount));
+      timeoutId.current = setTimeout(() => {
+        dispatch(submitAnswer(answer, amount));
+      }, CARD_TIMER);
     }
   };
 
