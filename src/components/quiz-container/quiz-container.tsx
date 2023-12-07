@@ -26,11 +26,13 @@ export function QuizContainer() {
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
   const [disabledOption, setDisabledOption] = useState(false);
+  const [pressedOptionId, setPressedOptionId] = useState<number | undefined>();
 
   const timeoutId = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     setDisabledOption(false);
+    setPressedOptionId(undefined);
 
     return () => {
       clearTimeout(timeoutId.current);
@@ -41,6 +43,7 @@ export function QuizContainer() {
     const target = event.target as HTMLButtonElement;
 
     setDisabledOption(true);
+    setPressedOptionId(Number(target.id));
 
     if (current) {
       const answer: AnswerType = {
@@ -82,10 +85,12 @@ export function QuizContainer() {
                   .sort((a, b) => a.id - b.id)
                   .map((option) => {
                     const optionValues = option.kana.split('; ');
+
                     const value =
                       optionValues.length > 1
                         ? optionValues[Math.round(Math.random())]
                         : optionValues[0];
+
                     return (
                       <Button
                         key={option.id}
@@ -95,6 +100,11 @@ export function QuizContainer() {
                         variant="secondary"
                         onClick={handleSubmitOption}
                         disabled={disabledOption}
+                        success={
+                          pressedOptionId === option.id
+                            ? pressedOptionId === current.question.id
+                            : undefined
+                        }
                       >
                         {value}
                       </Button>
