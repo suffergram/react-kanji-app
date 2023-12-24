@@ -2,15 +2,20 @@ import styled from 'styled-components';
 
 export const StyledCard = styled.div`
   user-select: none;
-  flex: 3;
+  flex: 4;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
-export const StyledHeading = styled.h2`
+export const StyledHeading = styled.p`
   font-size: 5rem;
+  font-weight: bold;
+  height: 5rem;
+  display: flex;
+  align-items: center;
   margin: 0;
 
   @media (max-width: 500px) or (max-height: 500px) {
@@ -24,7 +29,7 @@ export const Description = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-height: 500px) {
+  @media (max-height: 680px) {
     display: none;
   }
 `;
