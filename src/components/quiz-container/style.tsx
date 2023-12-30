@@ -1,38 +1,7 @@
-import styled, { css, keyframes } from 'styled-components';
-import { CARD_TIMER } from '../../data/constants/constants';
-
-const animateProgress = () => {
-  let myKeyframes = ``;
-  for (let i = 0; i <= 100; i += 1) {
-    myKeyframes += `
-      ${i}% {
-        background: conic-gradient(
-          rgba(255, 255, 255, 0) ${i}%,
-          rgba(255, 255, 255, 1) 0
-        )
-      }
-    `;
-  }
-
-  const animation = keyframes`${myKeyframes}`;
-
-  return css`
-    ${animation} ${CARD_TIMER / 1000}s forwards
-  `;
-};
-
-export const Loader = styled.div`
-  position: absolute;
-  top: 5rem;
-  width: 1.5rem;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  opacity: 0.5;
-  animation: ${animateProgress()};
-`;
+import styled from 'styled-components';
 
 export const CardOptionsContainer = styled.div`
-  flex: 1;
+  flex: 2;
 `;
 
 export const CardOptions = styled.div`
