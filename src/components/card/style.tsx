@@ -10,6 +10,14 @@ export const StyledCard = styled.div`
   position: relative;
 `;
 
+export const CurrentContent = styled.div`
+  position: relative;
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 export const StyledHeading = styled.p`
   font-size: 5rem;
   font-weight: bold;
@@ -36,4 +44,34 @@ export const Description = styled.div`
 
 export const Row = styled.p`
   margin: 0;
+`;
+
+export const MeaningContainer = styled.div`
+  flex: 2;
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const MeaningWrap = styled.div`
+  min-height: 29px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
+
+export const MeaningWord = styled.p`
+  margin: 0;
+  opacity: 0.8;
+  border: 1px solid #556;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  min-width: 2rem;
+  text-align: center;
+  white-space: nowrap;
 `;
