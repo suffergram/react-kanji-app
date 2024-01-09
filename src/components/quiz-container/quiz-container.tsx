@@ -4,7 +4,10 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { Card } from '../card/card';
 import { RootState } from '../../types/root-state';
-import { handleEndQuizAction } from '../../state/action-creators';
+import {
+  handleAddQuestionAction,
+  handleEndQuizAction,
+} from '../../state/action-creators';
 import { submitAnswer } from '../../state/submit-answer';
 import { AnswerType } from '../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
@@ -15,7 +18,7 @@ import { CARD_TIMER } from '../../data/constants/constants';
 import { CardLoader } from '../card-loader/card-loader';
 
 export function QuizContainer() {
-  const { current, amount, isResulting } = useSelector(
+  const { current, isResulting, amount } = useSelector(
     (state: RootState) => state.quizState
   );
 
@@ -41,17 +44,23 @@ export function QuizContainer() {
     setIsOptionPressed(true);
     setPressedOptionId(Number(target.id));
 
-    if (current) {
+    if (current.data) {
       const answer: AnswerType = {
-        card: current.question,
-        answer: [current.question, ...current.options].filter(
+        card: current.data.question,
+        answer: [current.data.question, ...current.data.options].filter(
           (option) => option.id === Number(target.id)
         )[0],
-        isRight: current.question.id === Number(target.id),
+        isRight: current.data.question.id === Number(target.id),
       };
 
       timeoutId.current = setTimeout(() => {
-        dispatch(submitAnswer(answer, amount));
+        let currentAmount = amount;
+        if (!answer.isRight && current.data) {
+          dispatch(handleAddQuestionAction(current.data));
+          currentAmount += 1;
+        }
+
+        dispatch(submitAnswer(answer, current.id >= currentAmount - 1));
       }, CARD_TIMER);
     }
   };
@@ -60,7 +69,10 @@ export function QuizContainer() {
     dispatch(handleEndQuizAction());
   };
 
-  const currentQuestion = current && [current.question, ...current.options];
+  const currentQuestion = current.data && [
+    current.data.question,
+    ...current.data.options,
+  ];
 
   return (
     <>
@@ -71,14 +83,15 @@ export function QuizContainer() {
           <QuizIndicator />
           <CardLoader isOptionPressed={isOptionPressed} />
           <Card
-            cardData={current?.question}
-            kanjiLevels={current?.kanjiLevels}
+            cardData={current.data?.question}
+            kanjiLevels={current.data?.kanjiLevels}
             isOptionPressed={isOptionPressed}
           />
           <CardOptionsContainer>
             <CardOptions>
               {currentQuestion
                 ?.sort((a, b) => a.id - b.id)
+                .sort(() => Math.round(Math.random()))
                 .map((option) => {
                   const optionValues = option.kana
                     .split(';')
@@ -100,7 +113,7 @@ export function QuizContainer() {
                       disabled={isOptionPressed}
                       success={
                         pressedOptionId === option.id
-                          ? pressedOptionId === current?.question.id
+                          ? pressedOptionId === current.data?.question.id
                           : undefined
                       }
                     >

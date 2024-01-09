@@ -7,5 +7,7 @@ export const StyledMain = styled.main`
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 100vw;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
 `;

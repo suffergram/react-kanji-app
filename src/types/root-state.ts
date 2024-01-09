@@ -8,7 +8,10 @@ export type RootState = {
     isResulting: boolean;
     answers: AnswerType[];
     pool: QuizPoolType[];
-    current: QuizPoolType | null;
+    current: {
+      id: number;
+      data: QuizPoolType | null;
+    };
     amount: number;
     kanjiLevel: number;
     vocabLevel: number;

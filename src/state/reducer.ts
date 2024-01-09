@@ -9,7 +9,10 @@ const initialState: RootState = {
     isResulting: false,
     answers: [],
     pool: [],
-    current: null,
+    current: {
+      id: -1,
+      data: null,
+    },
     amount: 5,
     kanjiLevel: 5,
     vocabLevel: 5,
@@ -49,7 +52,10 @@ export const reducer: Reducer<RootState, AnyAction> = (
           isLoading: false,
           isResulting: false,
           pool: [],
-          current: null,
+          current: {
+            id: -1,
+            data: null,
+          },
           answers: [],
         },
       };
@@ -58,11 +64,10 @@ export const reducer: Reducer<RootState, AnyAction> = (
         ...state,
         quizState: {
           ...state.quizState,
-          current:
-            state.quizState.pool[
-              state.quizState.pool.length - state.quizState.amount
-            ],
-          amount: state.quizState.amount - 1,
+          current: {
+            id: state.quizState.current.id + 1,
+            data: state.quizState.pool[state.quizState.current.id + 1],
+          },
         },
       };
     case QuizActions.HandleSubmitAnswer:
@@ -73,6 +78,15 @@ export const reducer: Reducer<RootState, AnyAction> = (
           answers: [...state.quizState.answers, action.payload],
         },
       };
+    case QuizActions.HandleAddQuestion:
+      return {
+        ...state,
+        quizState: {
+          ...state.quizState,
+          pool: [...state.quizState.pool, action.payload],
+          amount: state.quizState.amount + 1,
+        },
+      };
     case QuizActions.HandleQuizResult:
       return {
         ...state,
@@ -80,7 +94,10 @@ export const reducer: Reducer<RootState, AnyAction> = (
           ...state.quizState,
           isResulting: true,
           pool: [],
-          current: null,
+          current: {
+            id: 0,
+            data: null,
+          },
         },
       };
     case QuizActions.HandleKanjiLevel:

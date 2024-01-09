@@ -12,12 +12,12 @@ import { AnswerType } from '../types/answer-type';
 export const submitAnswer =
   (
     answer: AnswerType,
-    amount: number
+    isLast: boolean
   ): ThunkAction<void, RootState, unknown, AnyAction> =>
   (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
     try {
       dispatch(handleSubmitAnswerAction(answer));
-      if (amount > 0) dispatch(handleNewQuestionAction());
+      if (!isLast) dispatch(handleNewQuestionAction());
       else dispatch(handleQuizResultAction());
     } catch (error: unknown) {
       dispatch(handleErrorAction(error as string));

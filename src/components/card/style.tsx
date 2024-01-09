@@ -67,7 +67,7 @@ export const MeaningWrap = styled.div`
 
 export const MeaningWord = styled.p`
   margin: 0;
-  opacity: 0.8;
+  opacity: 0.9;
   border: 1px solid #556;
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;

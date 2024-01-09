@@ -26,6 +26,11 @@ export const handleSubmitAnswerAction = (answer: AnswerType) => ({
   payload: answer,
 });
 
+export const handleAddQuestionAction = (question: QuizPoolType) => ({
+  type: QuizActions.HandleAddQuestion,
+  payload: question,
+});
+
 export const handleQuizResultAction = () => ({
   type: QuizActions.HandleQuizResult,
 });

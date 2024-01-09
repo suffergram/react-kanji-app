@@ -10,13 +10,15 @@ import {
 type IndicatorPoint = 'checked' | 'current' | 'unchecked';
 
 export function QuizIndicator() {
-  const { amount, pool } = useSelector((state: RootState) => state.quizState);
+  const { amount, current } = useSelector(
+    (state: RootState) => state.quizState
+  );
 
   const points: Array<IndicatorPoint> = [];
 
-  for (let i = 0; i < pool.length; i += 1) {
-    if (pool.length - (amount + 1) === i) points.push('current');
-    else if (pool.length - (amount + 1) > i) points.push('checked');
+  for (let i = 0; i < amount; i += 1) {
+    if (current.id === i) points.push('current');
+    else if (current.id > i) points.push('checked');
     else points.push('unchecked');
   }
 
