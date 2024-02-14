@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.header`
@@ -17,9 +17,21 @@ export const Navigation = styled.nav`
   gap: 1rem;
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(Link)<{ $isCurrent: boolean }>`
   color: white;
   text-decoration: none;
+  box-sizing: border-box;
+
+  ${(props) => {
+    switch (props.$isCurrent) {
+      case true:
+        return css`
+          text-decoration: underline;
+        `;
+      default:
+        return css``;
+    }
+  }}
 
   &:hover {
     text-decoration: underline;
