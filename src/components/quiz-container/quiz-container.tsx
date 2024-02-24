@@ -84,7 +84,7 @@ export function QuizContainer() {
           <CardLoader isOptionPressed={isOptionPressed} />
           <Card
             cardData={current.data?.question}
-            kanjiLevels={current.data?.kanjiLevels}
+            kanjiLevels={current.data?.kanji.map((item) => item.jlpt)}
             isOptionPressed={isOptionPressed}
           />
           <CardOptionsContainer>

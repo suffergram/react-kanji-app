@@ -93,7 +93,6 @@ export const reducer: Reducer<RootState, AnyAction> = (
         quizState: {
           ...state.quizState,
           isResulting: true,
-          pool: [],
           current: {
             id: 0,
             data: null,

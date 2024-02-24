@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { SectionItemType } from '../../types/section-item-type';
 import { SectionItem } from '../section-item/section-item';
 import { Header, Line, Section, SectionContainer } from './style';
@@ -19,15 +20,14 @@ export function QuizResultSection({
       <SectionContainer>
         {Array.isArray(array) ? (
           array.map((item, index) => (
-            <>
+            <Fragment key={index}>
               <SectionItem
-                key={index}
                 primary={item.primary}
                 kana={item.kana}
                 meaning={item.meaning}
               />
               {index < array.length - 1 && <Line />}
-            </>
+            </Fragment>
           ))
         ) : (
           <SectionItem kana={array} />

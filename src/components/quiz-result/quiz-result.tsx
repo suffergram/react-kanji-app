@@ -2,14 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../types/root-state';
 import { handleEndQuizAction } from '../../state/action-creators';
 import { Button } from '../button/button';
-import { kanji } from '../../data/kanji/kanji';
 import { Heading, Container } from './style';
 import { QUIZ_AMOUNT } from '../../data/constants/constants';
 import { SectionItemType } from '../../types/section-item-type';
 import { QuizResultSection } from '../quiz-result-section/quiz-result-section';
 
 export function QuizResult() {
-  const { answers } = useSelector((state: RootState) => state.quizState);
+  const { answers, pool } = useSelector((state: RootState) => state.quizState);
 
   const dispatch = useDispatch();
 
@@ -20,17 +19,23 @@ export function QuizResult() {
   const result = answers.slice(0, QUIZ_AMOUNT);
 
   const kanjiReviewed: SectionItemType[] = Array.from(
-    new Set(result.map((item) => item.card.kanji.split('')).flat())
-  )
-    .map((item) => kanji.filter((kan) => item === kan.kanji)[0])
-    .map((item) => ({
-      primary: item.kanji,
+    new Set(
+      pool
+        .map((item) => item.kanji)
+        .flat()
+        .map((item) => JSON.stringify(item))
+    )
+  ).map((item) => {
+    const current = JSON.parse(item);
+    return {
+      primary: current.kanji,
       kana:
-        item.kun !== ''
-          ? item.kun.split(';').slice(0, 4).join(';')
-          : item.on.split(';').slice(0, 4).join(';'),
-      meaning: item.meaning.split(';').slice(0, 3).join(';'),
-    }));
+        current.kun !== ''
+          ? current.kun.split(';').slice(0, 4).join(';')
+          : current.on.split(';').slice(0, 4).join(';'),
+      meaning: current.meaning.split(';').slice(0, 3).join(';'),
+    };
+  });
 
   const vocabReviewed: SectionItemType[] = result.map((item) => ({
     primary: item.card.kanji,
@@ -62,7 +67,9 @@ export function QuizResult() {
         />
         <QuizResultSection
           area="mistake"
-          title={mistakes.length === 0 ? 'Perfect run' : 'Mistakes made in'}
+          title={
+            mistakes.length === 0 ? 'Perfect run' : 'Mistakes were made in'
+          }
           array={mistakes.length === 0 ? 'No mistakes' : mistakes}
         />
       </Container>
