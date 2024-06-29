@@ -7,7 +7,7 @@ import { RootState } from '../../types/root-state';
 import {
   handleAddQuestionAction,
   handleEndQuizAction,
-} from '../../state/action-creators';
+} from '../../state/quiz-action-creators';
 import { submitAnswer } from '../../state/submit-answer';
 import { AnswerType } from '../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';

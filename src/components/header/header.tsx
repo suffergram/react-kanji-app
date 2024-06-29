@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { NavLink, Navigation, StyledHeader } from './style';
+import { navLinks } from '../../data/nav-links/nav-links';
 
 export function Header() {
   const location = useLocation();
@@ -7,15 +8,15 @@ export function Header() {
   return (
     <StyledHeader>
       <Navigation>
-        <NavLink $isCurrent={location.pathname === '/'} to="/">
-          Quiz
-        </NavLink>
-        <NavLink
-          $isCurrent={location.pathname === '/dictionary'}
-          to="/dictionary"
-        >
-          Dictionary
-        </NavLink>
+        {navLinks.map((item) => (
+          <NavLink
+            $isCurrent={location.pathname === item.path}
+            to={item.path}
+            key={item.id}
+          >
+            {item.name}
+          </NavLink>
+        ))}
       </Navigation>
     </StyledHeader>
   );

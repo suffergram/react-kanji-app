@@ -5,7 +5,7 @@ import { RootState } from '../../types/root-state';
 import {
   handleKanjiLevelAction,
   handleVocabLevelAction,
-} from '../../state/action-creators';
+} from '../../state/quiz-action-creators';
 import { Menu, MenuTitle, StyledSection, StyledSlider } from './style';
 import { startQuiz } from '../../state/start-quiz';
 import { Button } from '../button/button';

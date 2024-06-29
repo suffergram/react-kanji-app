@@ -1,3 +1,5 @@
+import { VocabType } from './vocab-type';
+
 export type KanjiType = {
   id: number;
   kanji: string;
@@ -7,4 +9,5 @@ export type KanjiType = {
   romajiKun: string;
   kun: string;
   meaning: string;
+  ref?: Array<Partial<VocabType>>;
 };

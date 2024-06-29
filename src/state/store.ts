@@ -1,9 +1,15 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { reducer } from './reducer';
+import { quizReducer } from './quiz-reducer';
+import { dictReducer } from './dict-reducer';
+
+const rootReducer = combineReducers({
+  quizState: quizReducer,
+  dictState: dictReducer,
+});
 
 export const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(thunk)),
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
 );

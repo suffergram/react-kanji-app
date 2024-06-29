@@ -21,25 +21,25 @@ export const StyledButton = styled.button<{
   ${(props) => {
     const success = {
       undefined: {
-        bg: '#889',
-        bottom: '0 0.25rem #556',
+        bg: '#c5c5ce',
+        bottom: '0 0.25rem #707079',
         glow: undefined,
         active: 'none',
-        color: '#aab',
+        color: '#c5c5ce',
       },
       true: {
-        bg: '#8b8',
-        bottom: '0 0.25rem #585',
-        glow: '0 0 1rem rgba(136, 187, 136, 0.2)',
-        active: '0 0 1.5rem rgba(136, 187, 136, 0.2)',
+        bg: '#a8cda8',
+        bottom: '0 0.25rem #537853',
+        glow: '0 0 1rem rgba(168, 205, 168, 0.2)',
+        active: '0 0 1.5rem rgba(168, 205, 168, 0.2)',
         color: '#ada',
       },
       false: {
-        bg: '#b88',
-        bottom: '0 0.25rem #855',
-        glow: '0 0 1rem rgba(187, 136, 136, 0.2)',
-        active: '0 0 1.5rem rgba(187, 136, 136, 0.2)',
-        color: '#daa',
+        bg: '#d9bfbf',
+        bottom: '0 0.25rem #846a6a',
+        glow: '0 0 1rem rgba(217, 191, 191, 0.2)',
+        active: '0 0 1.5rem rgba(217, 191, 191, 0.2)',
+        color: '#d9bfbf',
       },
     };
 

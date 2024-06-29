@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
 import { SectionItemType } from '../../types/section-item-type';
 import { SectionItem } from '../section-item/section-item';
-import { Header, Line, Section, SectionContainer } from './style';
+import { Header, Section, SectionContainer } from './style';
+import { Line } from '../line/line';
 
 type QuizResultSectionProps = {
   area: string;

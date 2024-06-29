@@ -10,3 +10,10 @@ export enum QuizActions {
   HandleLoading = 'HANDLE_LOADING',
   HandleError = 'HANDLE_ERROR',
 }
+
+export enum DictActions {
+  HandleLoadingDict = 'HANDLE_LOADING_DICT',
+  HandleGetDict = 'HANDLE_GET_DICT',
+  HandleInitDict = 'HANDLE_INIT_DICT',
+  HandleSetSearch = 'HANDLE_SET_SEARCH',
+}

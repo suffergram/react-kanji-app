@@ -6,7 +6,7 @@ import {
   handleNewQuestionAction,
   handleQuizResultAction,
   handleSubmitAnswerAction,
-} from './action-creators';
+} from './quiz-action-creators';
 import { AnswerType } from '../types/answer-type';
 
 export const submitAnswer =

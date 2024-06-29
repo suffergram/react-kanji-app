@@ -35,9 +35,3 @@ export const SectionContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export const Line = styled.div`
-  border-bottom: 1px solid #556;
-  width: 100%;
-  margin: 0.125rem 0;
-`;

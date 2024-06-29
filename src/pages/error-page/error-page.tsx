@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ErrorCode } from './style';
+import { Button } from '../../components/button/button';
 
 export function ErrorPage() {
   const navigate = useNavigate();
@@ -10,9 +11,7 @@ export function ErrorPage() {
     <>
       <ErrorCode>404</ErrorCode>
       <p>Not Found</p>
-      <button type="button" onClick={handleClick}>
-        Go back
-      </button>
+      <Button value="Go back" variant="secondary" onClick={handleClick} />
     </>
   );
 }
