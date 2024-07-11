@@ -13,3 +13,13 @@ export const InstructionMessage = styled.p`
 export const InstructionExampleUl = styled.ul`
   line-height: 1.6rem;
 `;
+
+export const ExampleAnchor = styled.a`
+  color: lightblue;
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+

@@ -1,5 +1,6 @@
 import { Link, SetURLSearchParams } from 'react-router-dom';
 import {
+  ExampleAnchor,
   InstructionContainer,
   InstructionExampleUl,
   InstructionMessage,
@@ -32,24 +33,22 @@ export function DictInstruction({ setSearch }: DictInstructionProps) {
         Enter any Japanese or English text in the search box and get results
         including words and kanji.
       </InstructionMessage>
-      <InstructionMessage>Here's a few example searches.</InstructionMessage>
+      <InstructionMessage>Here's a few example searches:</InstructionMessage>
       <InstructionExampleUl>
         <li>
-          English:{' '}
-          <a
-            // href="/dict?search=car"
-            onClick={setExampleSearch}
-            style={{
-              color: 'lightblue',
-            }}
-          >
-            car
-          </a>
+          English: <ExampleAnchor onClick={setExampleSearch}>car</ExampleAnchor>
+          , <ExampleAnchor onClick={setExampleSearch}>room</ExampleAnchor>,{' '}
+          <ExampleAnchor onClick={setExampleSearch}>color</ExampleAnchor>
         </li>
         <li>Japanese: </li>
         <li>Kanji: </li>
         <li>Kana: </li>
-        <li>Romaji: </li>
+        <li>
+          Romaji:{' '}
+          <ExampleAnchor onClick={setExampleSearch}>otoko</ExampleAnchor>,{' '}
+          <ExampleAnchor onClick={setExampleSearch}>basho</ExampleAnchor>,{' '}
+          <ExampleAnchor onClick={setExampleSearch}>megane</ExampleAnchor>
+        </li>
       </InstructionExampleUl>
     </InstructionContainer>
   );

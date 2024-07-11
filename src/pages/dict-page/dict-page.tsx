@@ -56,7 +56,7 @@ export function DictPage() {
     }
   };
 
-  // const request = debounce(handleSearchParams, REQUEST_TIMEOUT);
+  const request = debounce(handleSearchParams, REQUEST_TIMEOUT);
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -71,13 +71,14 @@ export function DictPage() {
 
   // TODO: fix - handleExampleSearch causes 2 renders
 
-  // useEffect(() => {
-  //   request();
+  // TODO: do something with this useEffect hook =/
+  useEffect(() => {
+    request();
 
-  //   return () => {
-  //     request.cancel();
-  //   };
-  // }, [search]);
+    return () => {
+      request.cancel();
+    };
+  }, [search]);
 
   return (
     <DictionarySection>
@@ -86,7 +87,6 @@ export function DictPage() {
         onChange={handleInputChange}
         onSubmit={handleFormSubmit}
       />
-      {/* TODO: create an instruction component here */}
       {kanji.length === 0 && vocab.length === 0 && (
         <DictInstruction setSearch={handleExampleSearch} />
       )}
