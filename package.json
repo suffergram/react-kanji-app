@@ -11,11 +11,18 @@
     "lint-fix": "eslint --ext .jsx,.js,.json,.ts,.tsx --fix src/",
     "prepare": "husky install",
     "lint-staged": "lint-staged -c lint-staged.config.js",
-    "tscheck": "tsc --noEmit"
+    "tscheck": "tsc --noEmit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suffergram/react-kanji-app.git"
+  },
+  "homepage": "http://suffergram.github.io/react-kanji-app",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -48,6 +55,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.5.3",
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
