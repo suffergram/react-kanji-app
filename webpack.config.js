@@ -9,7 +9,7 @@ module.exports = (argv) => {
     output: {
       filename: 'index.js',
       path: path.resolve(__dirname, 'build'),
-      publicPath: '/',
+      publicPath: './',
     },
     module: {
       rules: [
