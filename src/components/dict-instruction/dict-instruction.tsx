@@ -8,6 +8,7 @@ import {
 import {
   AnchorHTMLAttributes,
   Dispatch,
+  Fragment,
   MouseEvent,
   MouseEventHandler,
   SetStateAction,
@@ -24,31 +25,39 @@ export function DictInstruction({ setSearch }: DictInstructionProps) {
     setSearch(target.text);
   };
 
+  const examples = {
+    english: ['car', 'room', 'color'],
+    japanese: ['可愛い', '生き物', '行く'],
+    kanji: ['車', '全', '危'],
+    kana: ['くすり', 'かい', 'ダイ'],
+    romaji: ['otoko', 'basho', 'megane'],
+  };
+
+  const instructions = [
+    'You can easily find words and kanji on this page.',
+    'Enter any Japanese or English text in the search box and get results including words and kanji.',
+    "Here's a few example searches:",
+  ];
+
   return (
     <InstructionContainer>
-      <InstructionMessage>
-        You can easily find words and kanji on this page.
-      </InstructionMessage>
-      <InstructionMessage>
-        Enter any Japanese or English text in the search box and get results
-        including words and kanji.
-      </InstructionMessage>
-      <InstructionMessage>Here's a few example searches:</InstructionMessage>
+      {instructions.map((message, index) => (
+        <InstructionMessage key={index}>{message}</InstructionMessage>
+      ))}
       <InstructionExampleUl>
-        <li>
-          English: <ExampleAnchor onClick={setExampleSearch}>car</ExampleAnchor>
-          , <ExampleAnchor onClick={setExampleSearch}>room</ExampleAnchor>,{' '}
-          <ExampleAnchor onClick={setExampleSearch}>color</ExampleAnchor>
-        </li>
-        <li>Japanese: </li>
-        <li>Kanji: </li>
-        <li>Kana: </li>
-        <li>
-          Romaji:{' '}
-          <ExampleAnchor onClick={setExampleSearch}>otoko</ExampleAnchor>,{' '}
-          <ExampleAnchor onClick={setExampleSearch}>basho</ExampleAnchor>,{' '}
-          <ExampleAnchor onClick={setExampleSearch}>megane</ExampleAnchor>
-        </li>
+        {Object.entries(examples).map(([title, values]) => (
+          <li key={title}>
+            {title[0].toUpperCase() + title.slice(1).toLowerCase()}:{' '}
+            {values.map((value, index) => (
+              <Fragment key={index}>
+                <ExampleAnchor onClick={setExampleSearch}>
+                  {value}
+                </ExampleAnchor>
+                {index !== values.length - 1 && ', '}
+              </Fragment>
+            ))}
+          </li>
+        ))}
       </InstructionExampleUl>
     </InstructionContainer>
   );
