@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ErrorCode } from './style';
-import { Button } from '../../components/button/button';
+import { Button } from '../../components/shared/button/button';
 
 export function ErrorPage() {
   const navigate = useNavigate();

@@ -2,9 +2,9 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import { RootState } from '../../types/root-state';
-import { ItemList } from '../../components/item-list/item-list';
-import { ItemCard } from '../../components/item-card/item-card';
-import { Search } from '../../components/search/search';
+import { ItemList } from '../../components/dict/item-list/item-list';
+import { ItemCard } from '../../components/dict/item-card/item-card';
+import { Search } from '../../components/dict/search/search';
 import {
   ChangeEvent,
   FormEvent,
@@ -16,7 +16,7 @@ import {
 import { useSearch } from '../../hooks/use-search/use-search';
 import { REQUEST_TIMEOUT } from '../../data/constants/constants';
 import { DictionaryContent, DictionarySection } from './style';
-import { DictInstruction } from '../../components/dict-instruction/dict-instruction';
+import { DictInstruction } from '../../components/dict/dict-instruction/dict-instruction';
 import { handleSetSearchAction } from '../../state/dict-action-creators';
 
 export function DictPage() {

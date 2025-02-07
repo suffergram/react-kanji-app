@@ -1,4 +1,4 @@
-import { VocabType } from '../../types/vocab-type';
+import { VocabType } from '../../../types/vocab-type';
 import {
   CurrentContent,
   Description,

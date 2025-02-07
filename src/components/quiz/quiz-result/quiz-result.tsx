@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../types/root-state';
-import { handleEndQuizAction } from '../../state/quiz-action-creators';
-import { Button } from '../button/button';
+import { RootState } from '../../../types/root-state';
+import { handleEndQuizAction } from '../../../state/quiz-action-creators';
+import { Button } from '../../shared/button/button';
 import { Heading, Container } from './style';
-import { QUIZ_AMOUNT } from '../../data/constants/constants';
-import { SectionItemType } from '../../types/section-item-type';
+import { QUIZ_AMOUNT } from '../../../data/constants/constants';
+import { SectionItemType } from '../../../types/section-item-type';
 import { QuizResultSection } from '../quiz-result-section/quiz-result-section';
 
 export function QuizResult() {

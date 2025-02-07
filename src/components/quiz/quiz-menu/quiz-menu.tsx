@@ -1,14 +1,14 @@
 import { AnyAction } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { RootState } from '../../types/root-state';
+import { RootState } from '../../../types/root-state';
 import {
   handleKanjiLevelAction,
   handleVocabLevelAction,
-} from '../../state/quiz-action-creators';
+} from '../../../state/quiz-action-creators';
 import { Menu, MenuTitle, StyledSection, StyledSlider } from './style';
-import { startQuiz } from '../../state/start-quiz';
-import { Button } from '../button/button';
+import { startQuiz } from '../../../state/start-quiz';
+import { Button } from '../../shared/button/button';
 
 export function QuizMenu() {
   const { kanjiLevel, vocabLevel } = useSelector(

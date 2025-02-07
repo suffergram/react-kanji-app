@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import { KanjiType } from '../../types/kanji-type';
-import { VocabType } from '../../types/vocab-type';
+import { KanjiType } from '../../../types/kanji-type';
+import { VocabType } from '../../../types/vocab-type';
 import { List, Title, FoundAmount, Container } from './style';
-import { Line } from '../line/line';
+import { Line } from '../../shared/line/line';
 
 type ItemGridProps = {
   title: string;

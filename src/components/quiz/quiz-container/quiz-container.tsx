@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { Card } from '../card/card';
-import { RootState } from '../../types/root-state';
+import { RootState } from '../../../types/root-state';
 import {
   handleAddQuestionAction,
   handleEndQuizAction,
-} from '../../state/quiz-action-creators';
-import { submitAnswer } from '../../state/submit-answer';
-import { AnswerType } from '../../types/answer-type';
+} from '../../../state/quiz-action-creators';
+import { submitAnswer } from '../../../state/submit-answer';
+import { AnswerType } from '../../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
 import { CardOptions, CardOptionsContainer, CloseButton } from './style';
-import { Button } from '../button/button';
+import { Button } from '../../shared/button/button';
 import { QuizIndicator } from '../quiz-indicator/quiz-indicator';
-import { CARD_TIMER } from '../../data/constants/constants';
+import { CARD_TIMER } from '../../../data/constants/constants';
 import { CardLoader } from '../card-loader/card-loader';
 
 export function QuizContainer() {

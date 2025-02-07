@@ -1,5 +1,5 @@
-import { KanjiType } from '../../types/kanji-type';
-import { VocabType } from '../../types/vocab-type';
+import { KanjiType } from '../../../types/kanji-type';
+import { VocabType } from '../../../types/vocab-type';
 import {
   CurrentInfo,
   CurrentItem,

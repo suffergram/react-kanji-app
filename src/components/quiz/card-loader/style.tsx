@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { CARD_TIMER } from '../../data/constants/constants';
+import { CARD_TIMER } from '../../../data/constants/constants';
 
 const animateProgress = () => {
   let myKeyframes = ``;

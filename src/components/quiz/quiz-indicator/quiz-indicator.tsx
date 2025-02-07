@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../types/root-state';
+import { RootState } from '../../../types/root-state';
 import {
   CheckedPoint,
   CurrentPoint,
