@@ -20,10 +20,9 @@ export function useSearch() {
   );
 
   useEffect(() => {
-    console.log('hook use effect');
-    const search = searchParams.get('search');
+    const search = searchParams.get('search') ?? '';
     dispatch(fetchSearchData(search));
-    dispatch(handleSetSearchAction(search ?? ''));
+    dispatch(handleSetSearchAction(search));
   }, [searchParams]);
 
   return { kanji, vocab, isLoading, search };

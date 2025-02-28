@@ -1,28 +1,19 @@
-import { Link, SetURLSearchParams } from 'react-router-dom';
+import { Fragment, MouseEvent, MouseEventHandler } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ExampleAnchor,
   InstructionContainer,
   InstructionExampleUl,
   InstructionMessage,
 } from './style';
-import {
-  AnchorHTMLAttributes,
-  Dispatch,
-  Fragment,
-  MouseEvent,
-  MouseEventHandler,
-  SetStateAction,
-  useCallback,
-} from 'react';
 
-type DictInstructionProps = {
-  setSearch: (param: string) => void;
-};
+export function DictInstruction() {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-export function DictInstruction({ setSearch }: DictInstructionProps) {
-  const setExampleSearch = (event: MouseEvent<HTMLAnchorElement>) => {
+  const setExampleSearch: MouseEventHandler = (event) => {
     const target = event.target as HTMLAnchorElement;
-    setSearch(target.text);
+    navigate(`${location.pathname}?search=${target.text}`);
   };
 
   const examples = {

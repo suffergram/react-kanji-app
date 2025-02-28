@@ -9,9 +9,3 @@ export const DictionarySection = styled.section`
   padding: 2rem 0;
   flex: 1;
 `;
-
-export const DictionaryContent = styled.div`
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-`;
