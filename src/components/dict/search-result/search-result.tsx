@@ -10,31 +10,26 @@ export function SearchResult() {
 
   // TODO: make pagination and remove slice(0, 50)
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) return <Loader />;
+
+  const sections = [
+    { title: 'Kanji', data: kanji },
+    { title: 'Words', data: vocab },
+  ].filter(({ data }) => data.length > 0);
+
+  if (!sections.length) return <DictInstruction />;
 
   return (
-    <>
-      {kanji.length === 0 && vocab.length === 0 && <DictInstruction />}
-      <DictionaryContent>
-        {!isLoading && kanji.length > 0 && (
-          <ItemList
-            title="Kanji"
-            data={kanji.slice(0, 50)}
-            amount={kanji.length}
-            item={ItemCard}
-          />
-        )}
-        {!isLoading && vocab.length > 0 && (
-          <ItemList
-            title="Words"
-            data={vocab.slice(0, 50)}
-            amount={vocab.length}
-            item={ItemCard}
-          />
-        )}
-      </DictionaryContent>
-    </>
+    <DictionaryContent>
+      {sections.map(({ title, data }) => (
+        <ItemList
+          key={title}
+          title={title}
+          data={data.slice(0, 50)}
+          amount={data.length}
+          item={ItemCard}
+        />
+      ))}
+    </DictionaryContent>
   );
 }
