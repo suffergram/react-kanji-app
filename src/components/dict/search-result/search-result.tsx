@@ -1,7 +1,5 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useSearch } from '../../../hooks/use-search/use-search';
-import { KanjiType } from '../../../types/kanji-type';
-import { VocabType } from '../../../types/vocab-type';
 import { Loader } from '../../shared/loader/loader';
 import { DictInstruction } from '../dict-instruction/dict-instruction';
 import { ItemCard } from '../item-card/item-card';
@@ -11,16 +9,13 @@ import { DictionaryContent } from './style';
 
 export function SearchResult() {
   const { kanji, vocab, isLoading } = useSearch();
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 20;
-
-  // TODO: make pagination and remove slice(0, 50)
+  const [searchParams, setSearchParams] = useSearchParams();
 
   if (isLoading) return <Loader />;
 
   const sections = [
-    { title: 'Kanji', data: kanji, rowsPerPage: 4 },
-    { title: 'Words', data: vocab, rowsPerPage: 8 },
+    { title: 'Kanji', data: kanji, rowsPerPage: 3 },
+    { title: 'Words', data: vocab, rowsPerPage: 6 },
   ].filter(({ data }) => data.length > 0);
 
   if (!sections.length) return <DictInstruction />;
@@ -31,17 +26,28 @@ export function SearchResult() {
     )
   );
 
+  const page = parseInt(searchParams.get('page') ?? '1', 10);
+
+  const setPage = (page: number) => {
+    searchParams.set('page', page.toString());
+    setSearchParams(searchParams);
+  };
+
   return (
     <>
       <DictionaryContent>
         {sections.map(({ title, data, rowsPerPage }) => {
           const start = (page - 1) * rowsPerPage;
           const end = start + rowsPerPage;
+          const currentData = data.slice(start, end);
+
+          if (currentData.length === 0) return null;
+
           return (
             <ItemList
               key={title}
               title={title}
-              data={data.slice(start, end)}
+              data={currentData}
               amount={data.length}
               item={ItemCard}
             />

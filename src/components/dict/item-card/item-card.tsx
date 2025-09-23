@@ -40,7 +40,7 @@ export function ItemCard({ item }: ItemTileProps): JSX.Element {
             on: <strong>{item.on.replaceAll(';', ',')}</strong>
           </Paragraph>
         )}
-        {item.ref?.slice(0, 3).map((ref) => (
+        {item.ref?.slice(0, 2).map((ref) => (
           <Paragraph key={ref.id}>
             {ref.kanji} ({ref.kana}) {ref.meaning}
           </Paragraph>
