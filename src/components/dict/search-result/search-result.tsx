@@ -5,17 +5,19 @@ import { DictInstruction } from '../dict-instruction/dict-instruction';
 import { ItemCard } from '../item-card/item-card';
 import { ItemList } from '../item-list/item-list';
 import { SearchPagination } from '../search-pagination/search-pagination';
-import { DictionaryContent } from './style';
+import { useRowsPerPage } from '../../../hooks/use-rows-per-page/use-rows-per-page';
+import { DictionaryContent, ResultContainer } from './style';
 
 export function SearchResult() {
   const { kanji, vocab, isLoading } = useSearch();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { kanji: kanjiRows, vocab: vocabRows } = useRowsPerPage(150, 70);
 
   if (isLoading) return <Loader />;
 
   const sections = [
-    { title: 'Kanji', data: kanji, rowsPerPage: 3 },
-    { title: 'Words', data: vocab, rowsPerPage: 6 },
+    { title: 'Kanji', data: kanji, rowsPerPage: kanjiRows },
+    { title: 'Words', data: vocab, rowsPerPage: vocabRows },
   ].filter(({ data }) => data.length > 0);
 
   if (!sections.length) return <DictInstruction />;
@@ -34,7 +36,7 @@ export function SearchResult() {
   };
 
   return (
-    <>
+    <ResultContainer>
       <DictionaryContent>
         {sections.map(({ title, data, rowsPerPage }) => {
           const start = (page - 1) * rowsPerPage;
@@ -61,6 +63,6 @@ export function SearchResult() {
         onPageChange={setPage}
         mode="global"
       />
-    </>
+    </ResultContainer>
   );
 }

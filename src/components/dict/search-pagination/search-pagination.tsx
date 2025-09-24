@@ -30,6 +30,21 @@ export function SearchPagination({
           mt: mode === 'global' ? 4 : 2,
           display: 'flex',
           justifyContent: 'center',
+          '& .MuiPaginationItem-root': {
+            color: 'white',
+          },
+          '& .MuiPaginationItem-root.Mui-selected': {
+            backgroundColor: 'transparent',
+            border: '1px solid rgba(255, 255, 255, 0.5)',
+            borderRadius: '50%',
+            color: 'white',
+            width: 36,
+            height: 36,
+            lineHeight: '36px',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            },
+          },
         }}
       />
     </Stack>

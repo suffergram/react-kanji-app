@@ -19,12 +19,10 @@ export function ItemList({ title, data, item: Item, amount }: ItemGridProps) {
         <FoundAmount>— {amount} found</FoundAmount>
       </Title>
       <List>
-        {data.map((item) => (
-          <Fragment key={item.id}>
-            <Item item={item} />
-            <Line />
-          </Fragment>
-        ))}
+        {data.flatMap((item, index) => [
+          <Item key={item.id} item={item} />,
+          index < data.length - 1 && <Line key={`line-${item.id}`} />,
+        ])}
       </List>
     </Container>
   );

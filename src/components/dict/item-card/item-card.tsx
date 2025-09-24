@@ -18,7 +18,7 @@ export function ItemCard({ item }: ItemTileProps): JSX.Element {
     <Tile>
       <CurrentItem>
         <Item>{item.kanji}</Item>
-        <Level>jlpt n{item.jlpt}</Level>
+        <Level jlpt={item.jlpt}>n{item.jlpt}</Level>
       </CurrentItem>
 
       <CurrentInfo>

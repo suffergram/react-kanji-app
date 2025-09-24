@@ -6,6 +6,6 @@ export const DictionarySection = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 2rem 0;
+  padding-top: 2rem;
   flex: 1;
 `;
