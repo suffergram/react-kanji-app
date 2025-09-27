@@ -16,6 +16,11 @@ type ItemTileProps = {
 };
 
 export function ItemCard({ item }: ItemTileProps) {
+  const meaning = truncateTarget(item.meaning)?.replaceAll(DELIMITER, ',');
+
+  const format = (val?: string) =>
+    val ? val.replaceAll(DELIMITER, ',') : undefined;
+
   return (
     <Tile>
       <CurrentItem>
@@ -26,7 +31,7 @@ export function ItemCard({ item }: ItemTileProps) {
       <CurrentInfo>
         <Paragraph>
           <strong>
-            {truncateTarget(item.meaning)?.replaceAll(DELIMITER, ',')}
+            {meaning}
           </strong>
         </Paragraph>
         {item.kana && (
@@ -36,12 +41,12 @@ export function ItemCard({ item }: ItemTileProps) {
         )}
         {item.kun && (
           <Paragraph>
-            kun: <strong>{item.kun.replaceAll(DELIMITER, ',')}</strong>
+            kun: <strong>{format(item.kun)}</strong>
           </Paragraph>
         )}
         {item.on && (
           <Paragraph>
-            on: <strong>{item.on.replaceAll(DELIMITER, ',')}</strong>
+            on: <strong>{format(item.on)}</strong>
           </Paragraph>
         )}
         {item.ref?.slice(0, 2).map((ref) => (
