@@ -41,9 +41,9 @@ export function SearchPagination({
             width: 36,
             height: 36,
             lineHeight: '36px',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            },
+          },
+          '& .MuiPaginationItem-root:not(.MuiPaginationItem-ellipsis):hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
           },
         }}
       />

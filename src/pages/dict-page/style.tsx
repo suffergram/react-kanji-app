@@ -8,4 +8,5 @@ export const DictionarySection = styled.section`
   gap: 2rem;
   padding-top: 2rem;
   flex: 1;
+  position: relative;
 `;

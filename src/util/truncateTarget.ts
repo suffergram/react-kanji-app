@@ -6,7 +6,7 @@ export const truncateTarget = (target?: string, maxLength: number = 30) => {
   if (target.length <= maxLength) return target;
 
   const parts = target.split(DELIMITER);
-  let result = '';
+  let result = parts.shift();
 
   for (const part of parts) {
     const temp = result ? result + DELIMITER + part : part;

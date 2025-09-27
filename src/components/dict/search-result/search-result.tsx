@@ -9,11 +9,9 @@ import { useRowsPerPage } from '../../../hooks/use-rows-per-page/use-rows-per-pa
 import { DictionaryContent, ResultContainer } from './style';
 
 export function SearchResult() {
-  const { kanji, vocab, isLoading } = useSearch();
+  const { kanji, vocab } = useSearch();
   const [searchParams, setSearchParams] = useSearchParams();
   const { kanji: kanjiRows, vocab: vocabRows } = useRowsPerPage(150, 90);
-
-  if (isLoading) return <Loader />;
 
   const sections = [
     { title: 'Kanji', data: kanji, rowsPerPage: kanjiRows },
