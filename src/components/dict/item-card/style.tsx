@@ -18,6 +18,7 @@ export const CurrentItem = styled.div`
 export const Item = styled.p`
   margin: 0;
   font-size: 2rem;
+  height: 52px;
 `;
 
 export const Level = styled.p<LevelProps>`
