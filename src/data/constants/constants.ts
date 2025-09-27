@@ -8,3 +8,5 @@ export const REQUEST_TIMEOUT = 2000;
 
 // export const HOST = 'http://localhost:4000'; // TODO: fix or remove
 export const HOST = 'https://node-kanji-api.vercel.app';
+
+export const DELIMITER = ';';

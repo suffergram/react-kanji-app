@@ -6,7 +6,6 @@ export function useRowsPerPage(kanjiRowHeight = 203, vocabRowHeight = 103) {
   useEffect(() => {
     const calc = () => {
       const availableHeight = window.innerHeight * 0.5;
-      console.log(availableHeight);
       setRows({
         kanji: Math.max(1, Math.floor(availableHeight / kanjiRowHeight)),
         vocab: Math.max(1, Math.floor(availableHeight / vocabRowHeight)),

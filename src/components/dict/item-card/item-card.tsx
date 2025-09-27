@@ -1,5 +1,7 @@
+import { DELIMITER } from '../../../data/constants/constants';
 import { KanjiType } from '../../../types/kanji-type';
 import { VocabType } from '../../../types/vocab-type';
+import { truncateTarget } from '../../../util/truncateTarget';
 import {
   CurrentInfo,
   CurrentItem,
@@ -13,7 +15,7 @@ type ItemTileProps = {
   item: KanjiType & VocabType;
 };
 
-export function ItemCard({ item }: ItemTileProps): JSX.Element {
+export function ItemCard({ item }: ItemTileProps) {
   return (
     <Tile>
       <CurrentItem>
@@ -23,7 +25,9 @@ export function ItemCard({ item }: ItemTileProps): JSX.Element {
 
       <CurrentInfo>
         <Paragraph>
-          <strong>{item.meaning.replaceAll(';', ',')}</strong>
+          <strong>
+            {truncateTarget(item.meaning)?.replaceAll(DELIMITER, ',')}
+          </strong>
         </Paragraph>
         {item.kana && (
           <Paragraph>
@@ -32,17 +36,17 @@ export function ItemCard({ item }: ItemTileProps): JSX.Element {
         )}
         {item.kun && (
           <Paragraph>
-            kun: <strong>{item.kun.replaceAll(';', ',')}</strong>
+            kun: <strong>{item.kun.replaceAll(DELIMITER, ',')}</strong>
           </Paragraph>
         )}
         {item.on && (
           <Paragraph>
-            on: <strong>{item.on.replaceAll(';', ',')}</strong>
+            on: <strong>{item.on.replaceAll(DELIMITER, ',')}</strong>
           </Paragraph>
         )}
         {item.ref?.slice(0, 2).map((ref) => (
           <Paragraph key={ref.id}>
-            {ref.kanji} ({ref.kana}) {ref.meaning}
+            {ref.kanji} ({ref.kana}) {truncateTarget(ref.meaning)}
           </Paragraph>
         ))}
       </CurrentInfo>

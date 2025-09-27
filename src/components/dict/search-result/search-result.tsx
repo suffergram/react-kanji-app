@@ -11,7 +11,7 @@ import { DictionaryContent, ResultContainer } from './style';
 export function SearchResult() {
   const { kanji, vocab, isLoading } = useSearch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { kanji: kanjiRows, vocab: vocabRows } = useRowsPerPage(150, 70);
+  const { kanji: kanjiRows, vocab: vocabRows } = useRowsPerPage(150, 90);
 
   if (isLoading) return <Loader />;
 
