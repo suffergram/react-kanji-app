@@ -6,7 +6,7 @@ import {
   handleLoadingAction,
   handleNewQuestionAction,
   handleStartQuizAction,
-} from './action-creators';
+} from './quiz-action-creators';
 import { HOST, OPTIONS_AMOUNT, QUIZ_AMOUNT } from '../data/constants/constants';
 
 export const startQuiz =
