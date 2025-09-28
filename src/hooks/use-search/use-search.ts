@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { RootState } from '../../types/root-state';
 import { AnyAction } from 'redux';
-import { fetchSearchData } from '../../state/fetch-search-data';
 import { useSearchParams } from 'react-router-dom';
+import { RootState } from '../../types/root-state';
+import { fetchSearchData } from '../../state/fetch-search-data';
 import { handleSetSearchAction } from '../../state/dict-action-creators';
 
 export function useSearch() {
