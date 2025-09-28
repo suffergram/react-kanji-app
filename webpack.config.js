@@ -1,16 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (argv) => {
   const isProduction = argv.mode === 'production';
-  
   return {
     entry: './src/index.tsx',
     output: {
-      filename: isProduction ? 'static/js/[name].[contenthash].js' : 'index.js',
+      filename: 'index.js',
       path: path.resolve(__dirname, 'build'),
-      publicPath: './',
-      clean: true,
+      publicPath: '/',
     },
     module: {
       rules: [
@@ -35,15 +34,12 @@ module.exports = (argv) => {
     devServer: {
       historyApiFallback: true,
       port: 3000,
-      static: {
-        directory: path.join(__dirname, 'build'),
-      },
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'public', 'index.html'),
-        filename: 'index.html',
+        template: path.join(__dirname, 'public', 'index.html')
       }),
+      ...(isProduction ? [new MiniCssExtractPlugin()] : []),
     ],
   };
 };

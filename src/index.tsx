@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Простейший компонент без зависимостей
 function App() {
-  console.log('App is rendering!'); // Это должно появиться в консоли
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
-      <h1>🚀 Kanji App is Working!</h1>
-      <p>If you see this, everything is working correctly.</p>
+    <div
+      style={{
+        padding: '40px',
+        backgroundColor: 'lightgreen',
+        textAlign: 'center',
+        borderRadius: '10px',
+        margin: '20px',
+      }}
+    >
+      <h1>✅ React + Webpack Works!</h1>
+      <p>Your build configuration is correct.</p>
     </div>
   );
 }
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Root element not found');
 
-console.log('About to render App...'); // Должно появиться в консоли
+const root = ReactDOM.createRoot(rootElement);
 root.render(<App />);
-console.log('App rendered!'); // Должно появиться в консоли
