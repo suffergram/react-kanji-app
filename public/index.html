@@ -4,75 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanji App</title>
-    <style>
-        body { 
-            margin: 0; 
-            font-family: Arial, sans-serif; 
-            background: #f0f0f0;
-        }
-        #root {
-            padding: 20px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-    <div id="root">
-        <h1>Loading React...</h1>
-    </div>
-
-    <!-- React из CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-    <script>
-        // Ждем полной загрузки страницы и React
-        console.log('Inline script executing!');
-        
-        function initApp() {
-            console.log('Initializing app...');
-            console.log('React:', window.React);
-            console.log('ReactDOM:', window.ReactDOM);
-            
-            if (window.React && window.ReactDOM) {
-                // Правильное использование React и ReactDOM
-                const React = window.React;
-                const ReactDOM = window.ReactDOM;
-                
-                function App() {
-                    return React.createElement('div', { 
-                        style: { 
-                            padding: '20px', 
-                            backgroundColor: 'lightgreen',
-                            borderRadius: '10px',
-                            margin: '20px'
-                        } 
-                    }, 
-                    React.createElement('h1', null, '✅ React is Working!'),
-                    React.createElement('p', null, 'JavaScript is executing correctly.'),
-                    React.createElement('button', { 
-                        onClick: () => alert('Button clicked!') 
-                    }, 'Test Button')
-                    );
-                }
-                
-                // Создаем корень и рендерим
-                const root = ReactDOM.createRoot(document.getElementById('root'));
-                root.render(React.createElement(App));
-                console.log('React app rendered successfully!');
-            } else {
-                console.error('React not available');
-                document.getElementById('root').innerHTML = 
-                    '<h1 style="color: red;">React CDN failed to load</h1>';
-            }
-        }
-
-        // Запускаем когда DOM готов
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initApp);
-        } else {
-            initApp();
-        }
-    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
 </body>
 </html>
