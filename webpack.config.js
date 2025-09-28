@@ -9,7 +9,7 @@ module.exports = (argv) => {
     output: {
       filename: isProduction ? 'static/js/[name].[contenthash].js' : 'index.js',
       path: path.resolve(__dirname, 'build'),
-      publicPath: '/',
+      publicPath: './',
       clean: true,
     },
     module: {
