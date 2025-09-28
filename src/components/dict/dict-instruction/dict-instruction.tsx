@@ -7,7 +7,7 @@ import {
   InstructionMessage,
 } from './style';
 
-export function DictInstruction() {
+export function DictInstruction({ errorMessage }: { errorMessage?: string }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,26 +30,34 @@ export function DictInstruction() {
     "Here's a few example searches:",
   ];
 
+  const list = Object.entries(examples).map(([title, values]) => (
+    <li key={title}>
+      {title[0].toUpperCase() + title.slice(1).toLowerCase()}:{' '}
+      {values.map((value, index) => (
+        <Fragment key={index}>
+          <ExampleAnchor onClick={setExampleSearch}>{value}</ExampleAnchor>
+          {index !== values.length - 1 && ', '}
+        </Fragment>
+      ))}
+    </li>
+  ));
+
+  if (errorMessage) {
+    return (
+      <InstructionContainer>
+        <InstructionMessage>{`${errorMessage} :(`}</InstructionMessage>
+        <InstructionMessage>{instructions.at(-1)}</InstructionMessage>
+        <InstructionExampleUl>{list}</InstructionExampleUl>
+      </InstructionContainer>
+    );
+  }
+
   return (
     <InstructionContainer>
       {instructions.map((message, index) => (
         <InstructionMessage key={index}>{message}</InstructionMessage>
       ))}
-      <InstructionExampleUl>
-        {Object.entries(examples).map(([title, values]) => (
-          <li key={title}>
-            {title[0].toUpperCase() + title.slice(1).toLowerCase()}:{' '}
-            {values.map((value, index) => (
-              <Fragment key={index}>
-                <ExampleAnchor onClick={setExampleSearch}>
-                  {value}
-                </ExampleAnchor>
-                {index !== values.length - 1 && ', '}
-              </Fragment>
-            ))}
-          </li>
-        ))}
-      </InstructionExampleUl>
+      <InstructionExampleUl>{list}</InstructionExampleUl>
     </InstructionContainer>
   );
 }

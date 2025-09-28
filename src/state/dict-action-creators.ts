@@ -19,7 +19,7 @@ export const handleSetSearchAction = (data: string) => ({
   payload: data,
 });
 
-export const handleErrorDictAction = (data: string) => ({
+export const handleErrorDictAction = (data: Error) => ({
   type: DictActions.HandleError,
   payload: data,
 });

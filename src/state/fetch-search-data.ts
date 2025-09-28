@@ -22,7 +22,7 @@ export const fetchSearchData =
         dispatch(handleInitDictAction());
       }
     } catch (error: unknown) {
-      if (typeof error === 'string') {
+      if (error instanceof Error) {
         dispatch(handleErrorDictAction(error));
       }
     }

@@ -39,6 +39,7 @@ export const dictReducer: Reducer<DictState, AnyAction> = (
     case DictActions.HandleError:
       return {
         ...state,
+        isLoading: false,
         error: action.payload,
       };
     default:

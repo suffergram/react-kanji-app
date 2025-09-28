@@ -24,7 +24,7 @@ export type DictState = {
   kanji: KanjiType[];
   vocab: VocabType[];
   search: string;
-  error?: string | null;
+  error?: Error | null;
 };
 
 export type RootState = {

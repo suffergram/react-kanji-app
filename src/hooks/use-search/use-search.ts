@@ -12,7 +12,7 @@ export function useSearch() {
 
   const [searchParams] = useSearchParams(new URLSearchParams());
 
-  const { kanji, vocab, isLoading, search } = useSelector(
+  const { kanji, vocab, isLoading, search, error } = useSelector(
     (state: RootState) => state.dictState
   );
 
@@ -22,5 +22,5 @@ export function useSearch() {
     dispatch(handleSetSearchAction(search));
   }, [searchParams]);
 
-  return { kanji, vocab, isLoading, search };
+  return { kanji, vocab, isLoading, search, error };
 }
