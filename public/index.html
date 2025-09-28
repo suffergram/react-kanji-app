@@ -35,11 +35,12 @@
             console.log('ReactDOM:', window.ReactDOM);
             
             if (window.React && window.ReactDOM) {
-                const { createElement: e, createRoot } = window.ReactDOM;
-                const { useState } = window.React;
+                // Правильное использование React и ReactDOM
+                const React = window.React;
+                const ReactDOM = window.ReactDOM;
                 
                 function App() {
-                    return e('div', { 
+                    return React.createElement('div', { 
                         style: { 
                             padding: '20px', 
                             backgroundColor: 'lightgreen',
@@ -47,16 +48,17 @@
                             margin: '20px'
                         } 
                     }, 
-                    e('h1', null, '✅ React is Working!'),
-                    e('p', null, 'JavaScript is executing correctly.'),
-                    e('button', { 
+                    React.createElement('h1', null, '✅ React is Working!'),
+                    React.createElement('p', null, 'JavaScript is executing correctly.'),
+                    React.createElement('button', { 
                         onClick: () => alert('Button clicked!') 
                     }, 'Test Button')
                     );
                 }
                 
-                const root = createRoot(document.getElementById('root'));
-                root.render(e(App));
+                // Создаем корень и рендерим
+                const root = ReactDOM.createRoot(document.getElementById('root'));
+                root.render(React.createElement(App));
                 console.log('React app rendered successfully!');
             } else {
                 console.error('React not available');
