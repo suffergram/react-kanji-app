@@ -18,44 +18,59 @@
 </head>
 <body>
     <div id="root">
-        <h1>Loading...</h1>
+        <h1>Loading React...</h1>
     </div>
-
-    <script>
-        // Inline React - чтобы убедиться что JS выполняется
-        console.log('Inline script executing!');
-        
-        // Простейший React рендер
-        const { createElement: e, createRoot } = React;
-        
-        function App() {
-            return e('div', { 
-                style: { 
-                    padding: '20px', 
-                    backgroundColor: 'lightgreen',
-                    borderRadius: '10px'
-                } 
-            }, 
-            e('h1', null, '✅ React is Working!'),
-            e('p', null, 'JavaScript is executing correctly.'),
-            e('button', { 
-                onClick: () => alert('Button clicked!') 
-            }, 'Test Button')
-            );
-        }
-        
-        // Ждем загрузки React из CDN
-        if (window.React && window.ReactDOM) {
-            const root = ReactDOM.createRoot(document.getElementById('root'));
-            root.render(e(App));
-            console.log('React app rendered!');
-        } else {
-            document.getElementById('root').innerHTML = '<h1 style="color: red;">React not loaded</h1>';
-        }
-    </script>
 
     <!-- React из CDN -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <script>
+        // Ждем полной загрузки страницы и React
+        console.log('Inline script executing!');
+        
+        function initApp() {
+            console.log('Initializing app...');
+            console.log('React:', window.React);
+            console.log('ReactDOM:', window.ReactDOM);
+            
+            if (window.React && window.ReactDOM) {
+                const { createElement: e, createRoot } = window.ReactDOM;
+                const { useState } = window.React;
+                
+                function App() {
+                    return e('div', { 
+                        style: { 
+                            padding: '20px', 
+                            backgroundColor: 'lightgreen',
+                            borderRadius: '10px',
+                            margin: '20px'
+                        } 
+                    }, 
+                    e('h1', null, '✅ React is Working!'),
+                    e('p', null, 'JavaScript is executing correctly.'),
+                    e('button', { 
+                        onClick: () => alert('Button clicked!') 
+                    }, 'Test Button')
+                    );
+                }
+                
+                const root = createRoot(document.getElementById('root'));
+                root.render(e(App));
+                console.log('React app rendered successfully!');
+            } else {
+                console.error('React not available');
+                document.getElementById('root').innerHTML = 
+                    '<h1 style="color: red;">React CDN failed to load</h1>';
+            }
+        }
+
+        // Запускаем когда DOM готов
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+    </script>
 </body>
 </html>
