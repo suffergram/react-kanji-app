@@ -3,11 +3,6 @@ import { KanjiType } from './kanji-type';
 import { QuizPoolType } from './quiz-pool-type';
 import { VocabType } from './vocab-type';
 
-export type RootState = {
-  quizState: QuizState;
-  dictState: DictState;
-};
-
 export type QuizState = {
   isLoading: boolean;
   isOngoing: boolean;
@@ -29,5 +24,10 @@ export type DictState = {
   kanji: KanjiType[];
   vocab: VocabType[];
   search: string;
-  error: string | undefined;
+  error?: string | null;
+};
+
+export type RootState = {
+  quizState: QuizState;
+  dictState: DictState;
 };

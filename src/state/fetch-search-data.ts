@@ -5,6 +5,7 @@ import {
   handleLoadingDictAction,
   handleGetDictAction,
   handleInitDictAction,
+  handleErrorDictAction,
 } from './dict-action-creators';
 import { DictServices } from '../services/services';
 import { SearchDTO } from '../types/search-dto';
@@ -20,5 +21,9 @@ export const fetchSearchData =
       } else {
         dispatch(handleInitDictAction());
       }
-    } catch (error: unknown) {}
+    } catch (error: unknown) {
+      if (typeof error === 'string') {
+        dispatch(handleErrorDictAction(error));
+      }
+    }
   };

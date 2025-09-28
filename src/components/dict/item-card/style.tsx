@@ -39,6 +39,8 @@ export const Level = styled.p<LevelProps>`
         return 'hsla(120, 70%, 60%, 0.4)'; // n4
       case 5:
         return 'hsla(220, 100%, 65%, 0.4)'; // n5
+      default:
+        return 'rgba(255, 255, 255, 0.4)';
     }
   }};
 `;

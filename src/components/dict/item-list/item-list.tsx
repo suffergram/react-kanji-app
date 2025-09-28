@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { KanjiType } from '../../../types/kanji-type';
 import { VocabType } from '../../../types/vocab-type';
 import { List, Title, FoundAmount, Container } from './style';

@@ -1,8 +1,5 @@
-import { TextField } from '@mui/material';
 import {
-  ChangeEvent,
   ChangeEventHandler,
-  FormEvent,
   FormEventHandler,
   useCallback,
   useEffect,
@@ -18,6 +15,7 @@ export function Search() {
     new URLSearchParams()
   );
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [search, setSearch] = useState(searchParams.get('search') ?? '');
 
@@ -28,7 +26,7 @@ export function Search() {
 
   const handleSearchParams = () => {
     if (search) {
-      setSearchParams({ search: search });
+      setSearchParams({ search });
     } else {
       setSearchParams({ search: '' });
       searchParams.delete('search');

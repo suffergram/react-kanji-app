@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
-# . "$(dirname -- "$0")/_/husky.sh"     // TODO: uncomment
+. "$(dirname -- "$0")/_/husky.sh"
 
-# npm run lint-staged                   // TODO: uncomment
+npm run lint-staged

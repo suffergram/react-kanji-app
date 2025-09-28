@@ -1,4 +1,4 @@
-import { Fragment, MouseEvent, MouseEventHandler } from 'react';
+import { Fragment, MouseEventHandler } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ExampleAnchor,

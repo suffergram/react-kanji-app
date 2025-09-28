@@ -6,15 +6,10 @@ export const truncateTarget = (target?: string, maxLength: number = 30) => {
   if (target.length <= maxLength) return target;
 
   const parts = target.split(DELIMITER);
-  let result = parts.shift();
+  const firstPart = parts.shift();
 
-  for (const part of parts) {
-    const temp = result ? result + DELIMITER + part : part;
-    if (temp.length > maxLength) {
-      break;
-    }
-    result = temp;
-  }
-
-  return result;
+  return parts.reduce((acc, part) => {
+    const temp = acc ? acc + DELIMITER + part : part;
+    return temp.length > maxLength ? acc : temp;
+  }, firstPart || '');
 };

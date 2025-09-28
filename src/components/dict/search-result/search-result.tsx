@@ -1,6 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
 import { useSearch } from '../../../hooks/use-search/use-search';
-import { Loader } from '../../shared/loader/loader';
 import { DictInstruction } from '../dict-instruction/dict-instruction';
 import { ItemCard } from '../item-card/item-card';
 import { ItemList } from '../item-list/item-list';

@@ -16,4 +16,5 @@ export enum DictActions {
   HandleGetDict = 'HANDLE_GET_DICT',
   HandleInitDict = 'HANDLE_INIT_DICT',
   HandleSetSearch = 'HANDLE_SET_SEARCH',
+  HandleError = 'HANDLE_ERROR',
 }

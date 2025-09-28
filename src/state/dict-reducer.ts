@@ -19,6 +19,7 @@ export const dictReducer: Reducer<DictState, AnyAction> = (
         isLoading: false,
         kanji: action.payload.kanji ? [...action.payload.kanji] : [],
         vocab: action.payload.vocab ? [...action.payload.vocab] : [],
+        error: null,
       };
     case DictActions.HandleInitDict:
       return {
@@ -27,11 +28,18 @@ export const dictReducer: Reducer<DictState, AnyAction> = (
         kanji: [],
         vocab: [],
         search: '',
+        error: null,
       };
     case DictActions.HandleSetSearch:
       return {
         ...state,
         search: action.payload,
+        error: null,
+      };
+    case DictActions.HandleError:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
