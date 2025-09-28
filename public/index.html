@@ -1,11 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanji App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: Arial, sans-serif; 
+            background: #f0f0f0;
+        }
+        #root {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1>Loading...</h1>
+    </div>
+
+    <script>
+        // Inline React - чтобы убедиться что JS выполняется
+        console.log('Inline script executing!');
+        
+        // Простейший React рендер
+        const { createElement: e, createRoot } = React;
+        
+        function App() {
+            return e('div', { 
+                style: { 
+                    padding: '20px', 
+                    backgroundColor: 'lightgreen',
+                    borderRadius: '10px'
+                } 
+            }, 
+            e('h1', null, '✅ React is Working!'),
+            e('p', null, 'JavaScript is executing correctly.'),
+            e('button', { 
+                onClick: () => alert('Button clicked!') 
+            }, 'Test Button')
+            );
+        }
+        
+        // Ждем загрузки React из CDN
+        if (window.React && window.ReactDOM) {
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(e(App));
+            console.log('React app rendered!');
+        } else {
+            document.getElementById('root').innerHTML = '<h1 style="color: red;">React not loaded</h1>';
+        }
+    </script>
+
+    <!-- React из CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</body>
 </html>
