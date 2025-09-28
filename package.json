@@ -7,6 +7,7 @@
     "build": "webpack --mode production",
     "build-dev": "webpack --mode development",
     "dev": "webpack serve --mode development",
+    "start": "serve build -s -l 3000",
     "lint": "eslint --ext .jsx,.js,.json,.ts,.tsx src/",
     "lint-fix": "eslint --ext .jsx,.js,.json,.ts,.tsx --fix src/",
     "prepare": "husky install",

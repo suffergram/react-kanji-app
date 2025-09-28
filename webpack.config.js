@@ -7,9 +7,10 @@ module.exports = (argv) => {
   return {
     entry: './src/index.tsx',
     output: {
-      filename: 'index.js',
+      filename: isProduction ? '[name].[contenthash].js' : 'index.js',
       path: path.resolve(__dirname, 'build'),
       publicPath: '/',
+      clean: true,
     },
     module: {
       rules: [
@@ -34,12 +35,20 @@ module.exports = (argv) => {
     devServer: {
       historyApiFallback: true,
       port: 3000,
+      static: {
+        directory: path.join(__dirname, 'build'),
+      },
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'public', 'index.html')
+        template: path.join(__dirname, 'public', 'index.html'),
+        minify: isProduction,
       }),
-      ...(isProduction ? [new MiniCssExtractPlugin()] : []),
+      ...(isProduction ? [
+        new MiniCssExtractPlugin({
+          filename: '[name].[contenthash].css',
+        })
+      ] : []),
     ],
   };
 };
