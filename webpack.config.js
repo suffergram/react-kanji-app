@@ -9,7 +9,7 @@ module.exports = (argv) => {
     output: {
       filename: 'index.js',
       path: path.resolve(__dirname, 'build'),
-      publicPath: './',
+      publicPath: isProduction ? './' : '/',
     },
     module: {
       rules: [
@@ -37,7 +37,8 @@ module.exports = (argv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'public', 'index.html')
+        template: path.join(__dirname, 'public', 'index.html'),
+        minify: isProduction,
       }),
       ...(isProduction ? [new MiniCssExtractPlugin()] : []),
     ],
