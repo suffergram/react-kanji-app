@@ -9,9 +9,10 @@ import {
 import { Menu, MenuTitle, StyledSection, StyledSlider } from './style';
 import { startQuiz } from '../../../state/start-quiz';
 import { Button } from '../../shared/button/button';
+import { Loader } from '../../shared/loader/loader';
 
 export function QuizMenu() {
-  const { kanjiLevel, vocabLevel } = useSelector(
+  const { kanjiLevel, vocabLevel, isLoading } = useSelector(
     (state: RootState) => state.quizState
   );
 
@@ -45,6 +46,7 @@ export function QuizMenu() {
 
   return (
     <StyledSection>
+      {isLoading && <Loader />}
       <Menu>
         <MenuTitle>Quiz preferences</MenuTitle>
         <label>

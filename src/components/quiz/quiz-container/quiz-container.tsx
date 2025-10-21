@@ -38,6 +38,10 @@ export function QuizContainer() {
     };
   }, [current]);
 
+  if (isResulting) {
+    return <QuizResult />;
+  }
+
   const handleSubmitOption = (event: MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
 
@@ -76,55 +80,49 @@ export function QuizContainer() {
 
   return (
     <>
-      {isResulting ? (
-        <QuizResult />
-      ) : (
-        <>
-          <QuizIndicator />
-          <CardLoader isOptionPressed={isOptionPressed} />
-          <Card
-            cardData={current.data?.question}
-            kanjiLevels={current.data?.kanji.map((item) => item.jlpt)}
-            isOptionPressed={isOptionPressed}
-          />
-          <CardOptionsContainer>
-            <CardOptions>
-              {currentQuestion
-                ?.sort((a, b) => a.id - b.id)
-                .sort(() => Math.round(Math.random()))
-                .map((option) => {
-                  const optionValues = option.kana
-                    .split(';')
-                    .map((item) => item.trim());
+      <QuizIndicator />
+      <CardLoader isOptionPressed={isOptionPressed} />
+      <Card
+        cardData={current.data?.question}
+        kanjiLevels={current.data?.kanji.map((item) => item.jlpt)}
+        isOptionPressed={isOptionPressed}
+      />
+      <CardOptionsContainer>
+        <CardOptions>
+          {currentQuestion
+            ?.sort((a, b) => a.id - b.id)
+            .sort(() => Math.round(Math.random()))
+            .map((option) => {
+              const optionValues = option.kana
+                .split(';')
+                .map((item) => item.trim());
 
-                  const value =
-                    optionValues.length > 1
-                      ? optionValues[Math.round(Math.random())]
-                      : optionValues[0];
+              const value =
+                optionValues.length > 1
+                  ? optionValues[Math.round(Math.random())]
+                  : optionValues[0];
 
-                  return (
-                    <Button
-                      key={option.id}
-                      id={option.id.toString()}
-                      type="button"
-                      value={value}
-                      variant="secondary"
-                      onClick={handleSubmitOption}
-                      disabled={isOptionPressed}
-                      success={
-                        pressedOptionId === option.id
-                          ? pressedOptionId === current.data?.question.id
-                          : undefined
-                      }
-                    >
-                      {value}
-                    </Button>
-                  );
-                })}
-            </CardOptions>
-          </CardOptionsContainer>
-        </>
-      )}
+              return (
+                <Button
+                  key={option.id}
+                  id={option.id.toString()}
+                  type="button"
+                  value={value}
+                  variant="secondary"
+                  onClick={handleSubmitOption}
+                  disabled={isOptionPressed}
+                  success={
+                    pressedOptionId === option.id
+                      ? pressedOptionId === current.data?.question.id
+                      : undefined
+                  }
+                >
+                  {value}
+                </Button>
+              );
+            })}
+        </CardOptions>
+      </CardOptionsContainer>
       <CloseButton type="button" onClick={handleEndQuiz}>
         ✕
       </CloseButton>
