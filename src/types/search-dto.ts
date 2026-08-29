@@ -1,3 +1,7 @@
+import { KanjiType } from './kanji-type';
+import { VocabType } from './vocab-type';
+
 export type SearchDTO = {
-  search: string;
+  kanji: KanjiType[];
+  vocab: VocabType[];
 };

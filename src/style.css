@@ -11,7 +11,8 @@ body {
   min-height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, #334, #222);
-  font-family: 'Raleway';
+  /* font-family: 'Raleway'; */
+  font-family: Arial;
   color: white;
 }
 

@@ -21,3 +21,12 @@ export const initialDictState = {
   search: '',
   error: undefined,
 };
+
+export const initialLearnState = {
+  isOngoing: false,
+  isLoading: false,
+  title: null,
+  pool: [],
+  lessons: null,
+  error: undefined,
+};

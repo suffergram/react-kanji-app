@@ -6,7 +6,7 @@ import { StyledMain } from './style';
 import { RootState } from '../../types/root-state';
 
 export function Layout() {
-  const { isOngoing } = useSelector((state: RootState) => state.quizState);
+  const state = useSelector((state: RootState) => state);
 
   const main = (
     <StyledMain>
@@ -14,7 +14,7 @@ export function Layout() {
     </StyledMain>
   );
 
-  if (isOngoing) return main;
+  if (state.quizState.isOngoing || state.learnState.isOngoing) return main;
 
   return (
     <>

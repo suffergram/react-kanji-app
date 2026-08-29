@@ -4,9 +4,7 @@ import { QuizMenu } from '../../components/quiz/quiz-menu/quiz-menu';
 import { RootState } from '../../types/root-state';
 
 export function HomePage() {
-  const { isLoading, isOngoing } = useSelector(
-    (state: RootState) => state.quizState
-  );
+  const { isOngoing } = useSelector((state: RootState) => state.quizState);
 
-  return !isLoading && isOngoing ? <QuizContainer /> : <QuizMenu />;
+  return isOngoing ? <QuizContainer /> : <QuizMenu />;
 }

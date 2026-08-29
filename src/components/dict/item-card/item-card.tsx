@@ -1,7 +1,7 @@
 import { DELIMITER } from '../../../data/constants/constants';
 import { KanjiType } from '../../../types/kanji-type';
 import { VocabType } from '../../../types/vocab-type';
-import { truncateTarget } from '../../../util/truncateTarget';
+import { truncateTarget } from '../../../util/truncate-target';
 import {
   CurrentInfo,
   CurrentItem,
