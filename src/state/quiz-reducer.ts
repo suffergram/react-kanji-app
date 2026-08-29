@@ -76,6 +76,7 @@ export const quizReducer: Reducer<QuizState, AnyAction> = (
     case QuizActions.HandleError:
       return {
         ...state,
+        isLoading: false,
         error: action.payload,
       };
     default:

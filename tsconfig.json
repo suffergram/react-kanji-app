@@ -1,13 +1,19 @@
 {
   "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
-    "strict": true,
     "allowJs": true,
     "checkJs": false,
-    "outDir": "./",
+    "strict": true,
     "skipLibCheck": true,
-    "lib": ["es2022", "dom"]
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src",
+    "noEmit": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "./lint-staged.config.js", "./webpack.config.js"]

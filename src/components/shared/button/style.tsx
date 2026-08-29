@@ -18,6 +18,13 @@ export const StyledButton = styled.button<{
     width: 84vw;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    position: relative;
+    box-shadow: none;
+  }
+
   ${(props) => {
     const success = {
       undefined: {
@@ -51,12 +58,16 @@ export const StyledButton = styled.button<{
           border: none;
           box-shadow: ${success[`${props.$success}`].bottom}
             ${success[`${props.$success}`].glow &&
-            `, ${  success[`${props.$success}`].glow}`};
+            `, ${success[`${props.$success}`].glow}`};
 
           &:active {
             position: relative;
             top: 0.25rem;
             box-shadow: ${success[`${props.$success}`].active};
+          }
+
+          &:disabled {
+            top: 0.25rem;
           }
         `;
       case 'secondary':
@@ -66,12 +77,16 @@ export const StyledButton = styled.button<{
           border: 0.125rem solid ${success[`${props.$success}`].bg};
           box-shadow: 0 0.125rem ${success[`${props.$success}`].bg}
             ${success[`${props.$success}`].glow &&
-            `, ${  success[`${props.$success}`].glow}`};
+            `, ${success[`${props.$success}`].glow}`};
 
           &:active {
             position: relative;
             top: 0.125rem;
             box-shadow: ${success[`${props.$success}`].active};
+          }
+
+          &:disabled {
+            top: 0.125rem;
           }
         `;
       default:

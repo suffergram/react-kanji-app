@@ -16,7 +16,7 @@ export const fetchSearchData =
     try {
       dispatch(handleLoadingDictAction());
       if (query) {
-        const data: SearchDTO = await DictServices.getSearchData(query);
+        const data: SearchDTO = await DictServices.getData(query);
         dispatch(handleGetDictAction(data));
       } else {
         dispatch(handleInitDictAction());

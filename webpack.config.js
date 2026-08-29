@@ -20,7 +20,11 @@ module.exports = (argv) => {
         },
         {
           test: /\.(ts|tsx)$/,
-          use: ['ts-loader']
+          exclude: /node_modules/,
+          use: {
+            loader: 'ts-loader',
+            options: { transpileOnly: true },
+          },
         },
         {
           test: /\.css$/,

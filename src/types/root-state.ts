@@ -1,5 +1,6 @@
 import { AnswerType } from './answer-type';
 import { KanjiType } from './kanji-type';
+import { LessonsDTO } from './lessons-dto';
 import { QuizPoolType } from './quiz-pool-type';
 import { VocabType } from './vocab-type';
 
@@ -27,7 +28,17 @@ export type DictState = {
   error?: Error | null;
 };
 
+export type LearnState = {
+  isLoading: boolean;
+  isOngoing: boolean;
+  title: string | null;
+  pool: KanjiType[];
+  lessons: LessonsDTO | null;
+  error?: Error;
+};
+
 export type RootState = {
   quizState: QuizState;
   dictState: DictState;
+  learnState: LearnState;
 };

@@ -4,10 +4,9 @@ export const StyledMain = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
-  padding: 1rem;
+  padding: 2rem;
   box-sizing: border-box;
   width: 100%;
 `;

@@ -11,11 +11,12 @@ import {
 import { submitAnswer } from '../../../state/submit-answer';
 import { AnswerType } from '../../../types/answer-type';
 import { QuizResult } from '../quiz-result/quiz-result';
-import { CardOptions, CardOptionsContainer, CloseButton } from './style';
+import { CardOptions, CardOptionsContainer } from './style';
 import { Button } from '../../shared/button/button';
 import { QuizIndicator } from '../quiz-indicator/quiz-indicator';
 import { CARD_TIMER } from '../../../data/constants/constants';
 import { CardLoader } from '../card-loader/card-loader';
+import { CloseButton } from '../../shared/close-button/close-button';
 
 export function QuizContainer() {
   const { current, isResulting, amount } = useSelector(
@@ -123,9 +124,7 @@ export function QuizContainer() {
             })}
         </CardOptions>
       </CardOptionsContainer>
-      <CloseButton type="button" onClick={handleEndQuiz}>
-        ✕
-      </CloseButton>
+      <CloseButton onClick={handleEndQuiz} />
     </>
   );
 }

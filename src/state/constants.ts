@@ -7,8 +7,8 @@ export enum QuizActions {
   HandleQuizResult = 'HANDLE_QUIZ_RESULT',
   HandleKanjiLevel = 'HANDLE_KANJI_LEVEL',
   HandleVocabLevel = 'HANDLE_VOCAB_LEVEL',
-  HandleLoading = 'HANDLE_LOADING',
-  HandleError = 'HANDLE_ERROR',
+  HandleLoading = 'HANDLE_LOADING_QUIZ',
+  HandleError = 'HANDLE_ERROR_QUIZ',
 }
 
 export enum DictActions {
@@ -16,5 +16,14 @@ export enum DictActions {
   HandleGetDict = 'HANDLE_GET_DICT',
   HandleInitDict = 'HANDLE_INIT_DICT',
   HandleSetSearch = 'HANDLE_SET_SEARCH',
-  HandleError = 'HANDLE_ERROR',
+  HandleError = 'HANDLE_ERROR_DICT',
+}
+
+export enum LearnActions {
+  HandleStartLearn = 'HANDLE_START_LEARN',
+  HandleEndLearn = 'HANDLE_END_LEARN',
+  HandleGetLearn = 'HANDLER_GET_LEARN',
+  HandleGetLessons = 'HANDLE_GET_LESSONS',
+  HandleLoading = 'HANDLE_LOADING_LEARN',
+  HandleError = 'HANDLE_ERROR_LEARN',
 }
