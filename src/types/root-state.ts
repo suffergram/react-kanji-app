@@ -24,6 +24,8 @@ export type DictState = {
   isLoading: boolean;
   kanji: KanjiType[];
   vocab: VocabType[];
+  kanjiTotal: number;
+  vocabTotal: number;
   search: string;
   error?: Error | null;
 };
