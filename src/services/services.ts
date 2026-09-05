@@ -4,9 +4,23 @@ import { LessonsDTO } from '../types/lessons-dto';
 import { SearchDTO } from '../types/search-dto';
 import { processResponse } from '../util/process-response';
 
+export type SearchRequestParams = {
+  page: number;
+  kanji: number;
+  vocab: number;
+};
+
 export const DictServices = {
-  getData: async (query: string): Promise<SearchDTO> => {
-    const url = `${HOST}/search/${query}`;
+  getData: async (
+    query: string,
+    { page, kanji, vocab }: SearchRequestParams
+  ): Promise<SearchDTO> => {
+    const params = new URLSearchParams({
+      page: String(page),
+      limitKanji: String(kanji),
+      limitVocab: String(vocab),
+    });
+    const url = `${HOST}/search/${query}?${params.toString()}`;
     return processResponse<SearchDTO>(await fetch(url));
   },
 };

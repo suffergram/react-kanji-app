@@ -3,12 +3,16 @@ import styled from 'styled-components';
 export const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex: 1;
+  min-height: 0;
+  width: 100%;
 `;
 
 export const DictionaryContent = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  align-items: start;
   gap: 2rem;
+  flex: 1;
   width: 100%;
 `;

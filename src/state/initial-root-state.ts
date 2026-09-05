@@ -18,6 +18,8 @@ export const initialDictState = {
   isLoading: false,
   kanji: [],
   vocab: [],
+  kanjiTotal: 0,
+  vocabTotal: 0,
   search: '',
   error: undefined,
 };

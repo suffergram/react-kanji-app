@@ -7,16 +7,23 @@ import {
   handleInitDictAction,
   handleErrorDictAction,
 } from './dict-action-creators';
-import { DictServices } from '../services/services';
+import { DictServices, SearchRequestParams } from '../services/services';
 import { SearchDTO } from '../types/search-dto';
 
 export const fetchSearchData =
-  (query: string | null): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (
+    query: string | null,
+    page: number,
+    limits: Pick<SearchRequestParams, 'kanji' | 'vocab'>
+  ): ThunkAction<void, RootState, unknown, AnyAction> =>
   async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
     try {
       dispatch(handleLoadingDictAction());
       if (query) {
-        const data: SearchDTO = await DictServices.getData(query);
+        const data: SearchDTO = await DictServices.getData(query, {
+          page,
+          ...limits,
+        });
         dispatch(handleGetDictAction(data));
       } else {
         dispatch(handleInitDictAction());

@@ -17,8 +17,10 @@ export const dictReducer: Reducer<DictState, AnyAction> = (
       return {
         ...state,
         isLoading: false,
-        kanji: action.payload.kanji ? [...action.payload.kanji] : [],
-        vocab: action.payload.vocab ? [...action.payload.vocab] : [],
+        kanji: action.payload.kanji ? [...action.payload.kanji.items] : [],
+        vocab: action.payload.vocab ? [...action.payload.vocab.items] : [],
+        kanjiTotal: action.payload.kanji?.total ?? 0,
+        vocabTotal: action.payload.vocab?.total ?? 0,
         error: null,
       };
     case DictActions.HandleInitDict:
@@ -27,6 +29,8 @@ export const dictReducer: Reducer<DictState, AnyAction> = (
         isLoading: false,
         kanji: [],
         vocab: [],
+        kanjiTotal: 0,
+        vocabTotal: 0,
         search: '',
         error: null,
       };
