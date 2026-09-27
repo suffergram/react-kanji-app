@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = (argv) => {
+module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
   return {
     entry: './src/index.tsx',
@@ -38,6 +38,12 @@ module.exports = (argv) => {
     devServer: {
       historyApiFallback: true,
       port: 3000,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:4000',
+          pathRewrite: { '^/api': '' }
+        },
+      },
     },
     plugins: [
       new HtmlWebpackPlugin({

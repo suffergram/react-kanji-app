@@ -11,6 +11,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "https://node-kanji-api.vercel.app/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
