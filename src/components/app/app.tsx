@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import {
   Route,
   RouterProvider,
@@ -9,6 +13,8 @@ import { ErrorPage } from '../../pages/error-page/error-page';
 import { Layout } from '../layout/layout';
 import { DictPage } from '../../pages/dict-page/dict-page';
 import { LearnPage } from '../../pages/learn-page/learn-page';
+import { RootState } from '../../types/root-state';
+import { fetchMe } from '../../state/auth-thunks';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,5 +28,11 @@ const router = createBrowserRouter(
 );
 
 export function App() {
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMe());
+  }, []);
+
   return <RouterProvider router={router} />;
 }
