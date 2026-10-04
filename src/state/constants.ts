@@ -22,8 +22,15 @@ export enum DictActions {
 export enum LearnActions {
   HandleStartLearn = 'HANDLE_START_LEARN',
   HandleEndLearn = 'HANDLE_END_LEARN',
-  HandleGetLearn = 'HANDLER_GET_LEARN',
+  HandleGetLearn = 'HANDLE_GET_LEARN',
   HandleGetLessons = 'HANDLE_GET_LESSONS',
   HandleLoading = 'HANDLE_LOADING_LEARN',
   HandleError = 'HANDLE_ERROR_LEARN',
+}
+
+export enum AuthActions {
+  HandleLoadingAuth = 'HANDLE_LOADING_AUTH',
+  HandleSetUser = 'HANDLE_SET_USER',
+  HandleSetGuest = 'HANDLE_SET_GUEST',
+  HandleError = 'HANDLE_ERROR_AUTH',
 }

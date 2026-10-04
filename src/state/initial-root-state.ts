@@ -1,3 +1,5 @@
+import { AuthState } from '../types/root-state';
+
 export const initialQuizState = {
   isLoading: false,
   isOngoing: false,
@@ -31,4 +33,11 @@ export const initialLearnState = {
   pool: [],
   lessons: null,
   error: undefined,
+};
+
+export const initialAuthState: AuthState = {
+  user: null,
+  status: 'unknown',
+  isLoading: false,
+  error: null,
 };
