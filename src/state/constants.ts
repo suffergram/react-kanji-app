@@ -33,4 +33,5 @@ export enum AuthActions {
   HandleSetUser = 'HANDLE_SET_USER',
   HandleSetGuest = 'HANDLE_SET_GUEST',
   HandleError = 'HANDLE_ERROR_AUTH',
+  HandleClearErrorAuth = 'HANDLE_CLEAR_ERROR_AUTH'
 }

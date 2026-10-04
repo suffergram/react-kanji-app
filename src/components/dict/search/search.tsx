@@ -8,7 +8,7 @@ import {
 import { debounce } from 'lodash';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { REQUEST_TIMEOUT } from '../../../data/constants/constants';
-import { SearchInput } from './style';
+import { TextInput } from '../../shared/text-input/text-input';
 
 export function Search() {
   const [searchParams, setSearchParams] = useSearchParams(
@@ -60,7 +60,8 @@ export function Search() {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <SearchInput
+      <TextInput
+        width="24rem"
         placeholder="English, Japanese, Romaji, words or kanji"
         value={search}
         onChange={handleInputChange}

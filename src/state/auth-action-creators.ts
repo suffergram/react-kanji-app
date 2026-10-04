@@ -18,3 +18,7 @@ export const handleErrorAuthAction = (data: string) => ({
   type: AuthActions.HandleError,
   payload: data,
 });
+
+export const handleClearErrorAuth = () => ({
+  type: AuthActions.HandleClearErrorAuth,
+});

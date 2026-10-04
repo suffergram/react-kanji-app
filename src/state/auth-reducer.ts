@@ -35,6 +35,11 @@ export const authReducer: Reducer<AuthState, AnyAction> = (
         isLoading: false,
         error: action.payload,
       };
+    case AuthActions.HandleClearErrorAuth:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
