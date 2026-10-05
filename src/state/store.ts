@@ -4,11 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { quizReducer } from './quiz-reducer';
 import { dictReducer } from './dict-reducer';
 import { learnReducer } from './learn-reducer';
+import { authReducer } from './auth-reducer';
 
 const rootReducer = combineReducers({
   quizState: quizReducer,
   dictState: dictReducer,
   learnState: learnReducer,
+  authState: authReducer,
 });
 
 export const store = createStore(

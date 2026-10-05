@@ -2,6 +2,7 @@ import { AnswerType } from './answer-type';
 import { KanjiType } from './kanji-type';
 import { LessonsDTO } from './lessons-dto';
 import { QuizPoolType } from './quiz-pool-type';
+import { UserType } from './user-type';
 import { VocabType } from './vocab-type';
 
 export type QuizState = {
@@ -39,8 +40,16 @@ export type LearnState = {
   error?: Error;
 };
 
+export type AuthState = {
+  user: UserType | null;
+  status: 'unknown' | 'authenticated' | 'guest';
+  isLoading: boolean;
+  error: string | null;
+};
+
 export type RootState = {
   quizState: QuizState;
   dictState: DictState;
   learnState: LearnState;
+  authState: AuthState;
 };

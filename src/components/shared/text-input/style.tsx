@@ -1,7 +1,11 @@
 import { InputBase } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 
-export const SearchInput = styled(InputBase)(({ theme }) => ({
+export const StyledInput = styled(InputBase, {
+  shouldForwardProp: (prop) => prop !== '$width',
+})<{
+  $width?: string;
+}>(({ theme, $width = '100%' }) => ({
   'label + &': {
     marginTop: theme.spacing(3),
   },
@@ -13,7 +17,7 @@ export const SearchInput = styled(InputBase)(({ theme }) => ({
     borderColor: '#2D3843',
     padding: '10px 12px',
     color: 'white',
-    width: '24rem',
+    width: $width,
     transition: theme.transitions.create([
       'border-color',
       'background-color',
