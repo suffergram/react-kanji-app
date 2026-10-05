@@ -17,6 +17,8 @@ import { RootState } from '../../types/root-state';
 import { fetchMe } from '../../state/auth-thunks';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { RegisterPage } from '../../pages/register-page/register-page';
+import { RequireAuth } from '../auth/require-auth/require-auth';
+import { DashboardPage } from '../../pages/dashboard-page/dashboard-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +28,9 @@ const router = createBrowserRouter(
       <Route path="dict" element={<DictPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      <Route element={<RequireAuth />}>
+        <Route path="dashboard" element={<DashboardPage />} />
+      </Route>
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

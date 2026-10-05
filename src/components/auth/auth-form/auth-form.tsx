@@ -2,10 +2,11 @@ import { FormEventHandler, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { TextInput } from '../../shared/text-input/text-input';
 import { RootState } from '../../../types/root-state';
 import { handleClearErrorAuth } from '../../../state/auth-action-creators';
+import { LocationType } from '../../../types/location-state';
 import {
   Card,
   ErrorMessage,
@@ -32,6 +33,7 @@ export function AuthForm({
   mode,
   onSubmit,
 }: AuthFormProps) {
+  const location = useLocation();
   const authState = useSelector((state: RootState) => state.authState);
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
@@ -45,8 +47,11 @@ export function AuthForm({
     []
   );
 
+  const state = location.state as LocationType | null;
+
   if (authState.status === 'authenticated') {
-    return <Navigate to="/" replace />;
+    const from = state?.from ?? '/';
+    return <Navigate to={from} replace />;
   }
 
   const handleFormSubmit: FormEventHandler = (event) => {
@@ -101,11 +106,16 @@ export function AuthForm({
         {mode === 'login' ? (
           <SwitchText>
             Don&apos;t have an account?{' '}
-            <SwitchLink to="/register">Sign Up</SwitchLink>
+            <SwitchLink to="/register" state={state}>
+              Sign Up
+            </SwitchLink>
           </SwitchText>
         ) : (
           <SwitchText>
-            Already have an account? <SwitchLink to="/login">Log In</SwitchLink>
+            Already have an account?{' '}
+            <SwitchLink to="/login" state={state}>
+              Log In
+            </SwitchLink>
           </SwitchText>
         )}
       </Card>

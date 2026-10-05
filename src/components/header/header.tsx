@@ -27,6 +27,14 @@ export function Header() {
   return (
     <StyledHeader>
       <Navigation>
+        {authState.status === 'authenticated' && (
+          <NavLink
+            $isCurrent={location.pathname === '/dashboard'}
+            to="/dashboard"
+          >
+            Dashboard
+          </NavLink>
+        )}
         {navLinks.map((item) => (
           <NavLink
             $isCurrent={location.pathname === item.path}
