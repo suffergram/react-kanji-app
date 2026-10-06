@@ -19,6 +19,7 @@ import { LoginPage } from '../../pages/login-page/login-page';
 import { RegisterPage } from '../../pages/register-page/register-page';
 import { RequireAuth } from '../auth/require-auth/require-auth';
 import { DashboardPage } from '../../pages/dashboard-page/dashboard-page';
+import { SettingsPage } from '../../pages/settings-page/settings-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="register" element={<RegisterPage />} />
       <Route element={<RequireAuth />}>
         <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Route>

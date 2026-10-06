@@ -11,11 +11,13 @@ export type SearchRequestParams = {
   vocab: number;
 };
 
-const postJson = (url: string, data: unknown) =>
+type Method = 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+const sendJson = (method: Method, url: string, data?: unknown) =>
   fetch(url, {
-    method: 'POST',
+    method,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: data === undefined ? undefined : JSON.stringify(data),
   });
 
 export const DictServices = {
@@ -51,14 +53,28 @@ export const AuthServices = {
   },
   login: async (email: string, password: string) => {
     const url = `${HOST}/auth/login`;
-    return processResponse<UserType>(await postJson(url, { email, password }));
+    return processResponse<UserType>(
+      await sendJson('POST', url, { email, password })
+    );
   },
   register: async (email: string, password: string) => {
     const url = `${HOST}/auth/register`;
-    return processResponse<UserType>(await postJson(url, { email, password }));
+    return processResponse<UserType>(
+      await sendJson('POST', url, { email, password })
+    );
   },
   logout: async () => {
     const url = `${HOST}/auth/logout`;
-    return processResponse<void>(await postJson(url, {}));
+    return processResponse<void>(await sendJson('POST', url));
+  },
+};
+
+export const UserServices = {
+  // null removes the nickname
+  updateProfile: async (displayName: string | null) => {
+    const url = `${HOST}/users/me`;
+    return processResponse<UserType>(
+      await sendJson('PATCH', url, { displayName })
+    );
   },
 };
