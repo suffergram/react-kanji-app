@@ -67,12 +67,29 @@ export const UserMenu = styled.div`
   }
 `;
 
-export const UserEmail = styled.span`
-  color: rgba(255, 255, 255, 0.7);
+export const UserName = styled.span`
   max-width: 14rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+export const ProfileLink = styled(Link)<{ $isCurrent: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  color: ${(props) =>
+    props.$isCurrent ? 'white' : 'rgba(255, 255, 255, 0.7)'};
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+
+  &:hover ${UserName} {
+    text-decoration: underline;
+  }
 `;
 
 export const LogoutButton = styled.button`

@@ -6,13 +6,16 @@ import {
   LogoutButton,
   NavLink,
   Navigation,
+  ProfileLink,
   StyledHeader,
-  UserEmail,
   UserMenu,
+  UserName,
 } from './style';
 import { navLinks } from '../../data/nav-links/nav-links';
 import { RootState } from '../../types/root-state';
 import { logout } from '../../state/auth-thunks';
+import { getDisplayName } from '../../util/get-display-name';
+import { Avatar } from '../shared/avatar/avatar';
 
 export function Header() {
   const location = useLocation();
@@ -23,6 +26,8 @@ export function Header() {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const { user } = authState;
 
   return (
     <StyledHeader>
@@ -58,11 +63,16 @@ export function Header() {
           </NavLink>
         </UserMenu>
       )}
-      {authState.status === 'authenticated' && (
+      {authState.status === 'authenticated' && user && (
         <UserMenu>
-          <UserEmail title={authState.user?.email}>
-            {authState.user?.email}
-          </UserEmail>
+          <ProfileLink
+            to="/settings"
+            title={`${getDisplayName(user)} · Settings`}
+            $isCurrent={location.pathname === '/settings'}
+          >
+            <Avatar user={user} size={1.75} />
+            <UserName>{getDisplayName(user)}</UserName>
+          </ProfileLink>
           <LogoutButton
             type="button"
             onClick={handleLogout}

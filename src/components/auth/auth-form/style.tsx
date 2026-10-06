@@ -21,38 +21,7 @@ export const Title = styled.h1`
   text-align: center;
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-
-  /* MUI input is content-box with a fixed height: switch to border-box so
-     100% width includes padding, and let the height grow with the padding */
-  & .MuiInputBase-input {
-    box-sizing: border-box;
-    height: auto;
-  }
-`;
-
-export const Field = styled.label`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-export const FieldLabel = styled.span`
-  font-size: 0.875rem;
-  color: #aab;
-`;
-
-export const ErrorMessage = styled.div`
-  padding: 0.75rem 1rem;
-  border-left: 0.25rem solid #d9bfbf;
-  border-radius: 0.25rem;
-  background-color: rgba(217, 191, 191, 0.1);
-  color: #d9bfbf;
-  font-size: 0.875rem;
-`;
+export { Form, Field, FieldLabel, ErrorMessage } from '../../shared/form/style';
 
 export const SubmitButton = styled(Button)`
   width: 100%;
