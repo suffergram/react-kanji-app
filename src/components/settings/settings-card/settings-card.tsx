@@ -1,44 +1,58 @@
 import { FormEventHandler, ReactNode } from 'react';
 import { ErrorMessage, Form, SuccessMessage } from '../../shared/form/style';
 import { SaveStatus } from '../../../types/save-status';
-import { Card, CardTitle, SaveButton } from './style';
+import {
+  Card,
+  CardButton,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './style';
 
 type SettingsCardProps = {
   title: string;
+  description?: string;
   status: SaveStatus;
-  isChanged: boolean;
+  canSubmit: boolean;
   error: string | null;
   successText: string;
-  handleSubmit: FormEventHandler;
+  onSubmit: FormEventHandler;
   children: ReactNode;
 };
 
 export function SettingsCard({
   title,
+  description,
   status,
-  isChanged,
+  canSubmit,
   error,
   successText,
-  handleSubmit,
+  onSubmit,
   children,
 }: SettingsCardProps) {
   return (
     <Card>
-      <CardTitle>{title}</CardTitle>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        {description && <CardDescription>{description}</CardDescription>}
+      </CardHeader>
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onSubmit}>
         {children}
         {error && <ErrorMessage role="alert">{error}</ErrorMessage>}
         {status === 'saved' && (
           <SuccessMessage role="status">{successText}</SuccessMessage>
         )}
 
-        <SaveButton
-          type="submit"
-          variant="primary"
-          value={status === 'saving' ? 'Saving…' : 'Save'}
-          disabled={!isChanged || status === 'saving'}
-        />
+        <CardFooter>
+          <CardButton
+            type="submit"
+            variant="primary"
+            value={status === 'saving' ? 'Saving…' : 'Save'}
+            disabled={!canSubmit || status === 'saving'}
+          />
+        </CardFooter>
       </Form>
     </Card>
   );

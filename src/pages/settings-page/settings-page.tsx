@@ -2,8 +2,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../types/root-state';
 import { ProfileSection } from '../../components/settings/profile-section/profile-section';
 import { PasswordSection } from '../../components/settings/password-section/password-section';
-import { StyledSection, Title } from './style';
 import { EmailSection } from '../../components/settings/email-section/email-section';
+import { DeleteSection } from '../../components/settings/delete-section/delete-section';
+import { PageHeader, StyledSection, Subtitle, Title } from './style';
 
 export function SettingsPage() {
   const { user } = useSelector((state: RootState) => state.authState);
@@ -13,10 +14,14 @@ export function SettingsPage() {
 
   return (
     <StyledSection>
-      <Title>Settings</Title>
+      <PageHeader>
+        <Title>Settings</Title>
+        <Subtitle>Manage your profile and account security</Subtitle>
+      </PageHeader>
       <ProfileSection user={user} />
       <PasswordSection />
       <EmailSection user={user} />
+      <DeleteSection />
     </StyledSection>
   );
 }

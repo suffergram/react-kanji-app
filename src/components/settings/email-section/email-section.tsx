@@ -22,14 +22,14 @@ export function EmailSection({ user }: EmailSectionProps) {
   const [status, setStatus] = useState<SaveStatus>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  const isChanged = !!password && !!email;
+  const canSubmit = !!password && !!email;
 
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
     setError(null);
 
-    if (email === user.email) {
-      setError('This email is already associated with an account');
+    if (email.trim().toLowerCase() === user.email) {
+      setError('This is already your current email');
       return;
     }
     setStatus('saving');
@@ -44,7 +44,7 @@ export function EmailSection({ user }: EmailSectionProps) {
       setError(
         err instanceof ApiError
           ? err.message
-          : 'Network error, please try again'
+          : 'Could not reach the server, please try again'
       );
       setStatus('idle');
     }
@@ -53,14 +53,15 @@ export function EmailSection({ user }: EmailSectionProps) {
   return (
     <SettingsCard
       title="Email"
+      description="Used to log in. Changing it logs you out on all other devices"
       status={status}
-      isChanged={isChanged}
+      canSubmit={canSubmit}
       error={error}
-      successText="Email changed"
-      handleSubmit={handleSubmit}
+      successText="Email updated"
+      onSubmit={handleSubmit}
     >
       <Field>
-        <FieldLabel>New Email</FieldLabel>
+        <FieldLabel>New email</FieldLabel>
         <TextInput
           type="email"
           required
@@ -72,14 +73,13 @@ export function EmailSection({ user }: EmailSectionProps) {
             setStatus('idle');
           }}
         />
-        <FieldHint>Your current email address is {user.email}.</FieldHint>
+        <FieldHint>Current email: {user.email}</FieldHint>
       </Field>
 
       <Field>
-        <FieldLabel>Current Password</FieldLabel>
+        <FieldLabel>Current password</FieldLabel>
         <TextInput
           fullWidth
-          placeholder="Current Password"
           value={password}
           onChange={(event) => {
             setPassword(event.target.value);

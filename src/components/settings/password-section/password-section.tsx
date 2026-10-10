@@ -9,7 +9,7 @@ import { Field, FieldLabel } from '../../shared/form/style';
 const initState = {
   current: '',
   new: '',
-  repeated: '',
+  confirmation: '',
 };
 
 export function PasswordSection() {
@@ -18,13 +18,13 @@ export function PasswordSection() {
   const [status, setStatus] = useState<SaveStatus>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  const isChanged = Object.values(password).every(Boolean);
+  const canSubmit = Object.values(password).every(Boolean);
 
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
     setError(null);
 
-    if (password.new !== password.repeated) {
+    if (password.new !== password.confirmation) {
       setError('Passwords do not match');
       return;
     }
@@ -38,7 +38,7 @@ export function PasswordSection() {
       setError(
         err instanceof ApiError
           ? err.message
-          : 'Network error, please try again'
+          : 'Could not reach the server, please try again'
       );
       setStatus('idle');
     }
@@ -57,17 +57,17 @@ export function PasswordSection() {
   return (
     <SettingsCard
       title="Password"
+      description="Changing your password logs you out on all other devices"
       status={status}
-      isChanged={isChanged}
+      canSubmit={canSubmit}
       error={error}
-      successText="Password changed"
-      handleSubmit={handleSubmit}
+      successText="Password updated"
+      onSubmit={handleSubmit}
     >
       <Field>
-        <FieldLabel>Current Password</FieldLabel>
+        <FieldLabel>Current password</FieldLabel>
         <TextInput
           fullWidth
-          placeholder="Current Password"
           value={password.current}
           onChange={handlePasswordChange('current')}
           inputProps={{ maxLength: 72 }}
@@ -77,10 +77,10 @@ export function PasswordSection() {
       </Field>
 
       <Field>
-        <FieldLabel>New Password</FieldLabel>
+        <FieldLabel>New password</FieldLabel>
         <TextInput
           fullWidth
-          placeholder="New Password"
+          placeholder="At least 8 characters"
           value={password.new}
           onChange={handlePasswordChange('new')}
           inputProps={{ maxLength: 72, minLength: 8 }}
@@ -90,12 +90,11 @@ export function PasswordSection() {
       </Field>
 
       <Field>
-        <FieldLabel>Repeat New Password</FieldLabel>
+        <FieldLabel>Confirm new password</FieldLabel>
         <TextInput
           fullWidth
-          placeholder="New Password"
-          value={password.repeated}
-          onChange={handlePasswordChange('repeated')}
+          value={password.confirmation}
+          onChange={handlePasswordChange('confirmation')}
           inputProps={{ maxLength: 72, minLength: 8 }}
           type="password"
           autoComplete="new-password"

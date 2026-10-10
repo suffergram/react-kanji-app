@@ -89,6 +89,23 @@ export const StyledButton = styled.button<{
             top: 0.125rem;
           }
         `;
+      case 'danger':
+        return css`
+          color: white;
+          background-color: #c94f4f;
+          border: none;
+          box-shadow: 0 0.25rem #7d2f2f;
+
+          &:active {
+            position: relative;
+            top: 0.25rem;
+            box-shadow: none;
+          }
+
+          &:disabled {
+            top: 0.25rem;
+          }
+        `;
       default:
         return css``;
     }

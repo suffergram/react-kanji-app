@@ -53,13 +53,13 @@ export function Header() {
       {authState.status === 'guest' && (
         <UserMenu>
           <NavLink $isCurrent={location.pathname === '/login'} to="/login">
-            Log In
+            Log in
           </NavLink>
           <NavLink
             $isCurrent={location.pathname === '/register'}
             to="/register"
           >
-            Sign Up
+            Sign up
           </NavLink>
         </UserMenu>
       )}
@@ -78,7 +78,7 @@ export function Header() {
             onClick={handleLogout}
             disabled={authState.isLoading}
           >
-            Log Out
+            Log out
           </LogoutButton>
         </UserMenu>
       )}

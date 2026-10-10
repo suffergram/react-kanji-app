@@ -13,8 +13,8 @@ export function RegisterPage() {
 
   return (
     <AuthForm
-      title="Sign Up"
-      submitLabel="Sign Up"
+      title="Create an account"
+      submitLabel="Sign up"
       mode="register"
       onSubmit={handleSubmit}
     />

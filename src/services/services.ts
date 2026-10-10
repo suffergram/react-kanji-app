@@ -89,4 +89,10 @@ export const UserServices = {
       await sendJson('PATCH', url, { email, currentPassword })
     );
   },
+  deleteAccount: async (currentPassword: string) => {
+    const url = `${HOST}/users/me`;
+    return processResponse<void>(
+      await sendJson('DELETE', url, { currentPassword })
+    );
+  },
 };

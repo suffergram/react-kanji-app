@@ -40,7 +40,7 @@ export function ProfileSection({ user }: ProfileSectionProps) {
       setError(
         err instanceof ApiError
           ? err.message
-          : 'Network error, please try again'
+          : 'Could not reach the server, please try again'
       );
       setStatus('idle');
     }
@@ -49,11 +49,12 @@ export function ProfileSection({ user }: ProfileSectionProps) {
   return (
     <SettingsCard
       title="Profile"
+      description="How you appear across the app"
       status={status}
-      isChanged={isChanged}
+      canSubmit={isChanged}
       error={error}
-      successText="Saved"
-      handleSubmit={handleSubmit}
+      successText="Profile updated"
+      onSubmit={handleSubmit}
     >
       <ProfileSummary>
         <Avatar user={{ ...user, displayName: nextDisplayName }} size={3.5} />
@@ -73,7 +74,7 @@ export function ProfileSection({ user }: ProfileSectionProps) {
           inputProps={{ maxLength: 32 }}
         />
         <FieldHint>
-          Shown instead of your email. Leave empty to use “{emailName}”.
+          Shown instead of your email. Leave it empty to use “{emailName}”.
         </FieldHint>
       </Field>
     </SettingsCard>

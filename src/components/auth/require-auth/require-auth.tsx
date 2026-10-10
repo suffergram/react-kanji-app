@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../types/root-state';
 import { Loader } from '../../shared/loader/loader';
-import { LocationType } from '../../../types/location-state';
+import { LocationState } from '../../../types/location-state';
 
 export function RequireAuth() {
   const location = useLocation();
@@ -13,7 +13,7 @@ export function RequireAuth() {
   }
 
   if (authState.status === 'guest') {
-    const state: LocationType = { from: location.pathname };
+    const state: LocationState = { from: location.pathname };
     return <Navigate to="/login" replace state={state} />;
   }
 

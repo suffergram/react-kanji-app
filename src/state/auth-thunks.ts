@@ -39,7 +39,7 @@ export const login =
       const message =
         error instanceof ApiError
           ? error.message
-          : 'Network error, please try again';
+          : 'Could not reach the server, please try again';
       dispatch(handleErrorAuthAction(message));
       return false;
     }
@@ -60,7 +60,7 @@ export const register =
       const message =
         error instanceof ApiError
           ? error.message
-          : 'Network error, please try again';
+          : 'Could not reach the server, please try again';
       dispatch(handleErrorAuthAction(message));
       return false;
     }
