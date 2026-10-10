@@ -18,7 +18,7 @@ export function PasswordSection() {
   const [status, setStatus] = useState<SaveStatus>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  const isChanged = Object.values(initState).every(Boolean);
+  const isChanged = Object.values(password).every(Boolean);
 
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();

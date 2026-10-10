@@ -83,4 +83,10 @@ export const UserServices = {
       await sendJson('PATCH', url, { currentPassword, newPassword })
     );
   },
+  changeEmail: async (email: string, currentPassword: string) => {
+    const url = `${HOST}/users/me/email`;
+    return processResponse<UserType>(
+      await sendJson('PATCH', url, { email, currentPassword })
+    );
+  },
 };

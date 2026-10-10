@@ -3,6 +3,7 @@ import { RootState } from '../../types/root-state';
 import { ProfileSection } from '../../components/settings/profile-section/profile-section';
 import { PasswordSection } from '../../components/settings/password-section/password-section';
 import { StyledSection, Title } from './style';
+import { EmailSection } from '../../components/settings/email-section/email-section';
 
 export function SettingsPage() {
   const { user } = useSelector((state: RootState) => state.authState);
@@ -15,6 +16,7 @@ export function SettingsPage() {
       <Title>Settings</Title>
       <ProfileSection user={user} />
       <PasswordSection />
+      <EmailSection user={user} />
     </StyledSection>
   );
 }
