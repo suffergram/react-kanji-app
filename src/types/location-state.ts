@@ -1,3 +1,3 @@
-export type LocationType = {
+export type LocationState = {
   from?: string;
 };

@@ -13,8 +13,8 @@ export function LoginPage() {
 
   return (
     <AuthForm
-      title="Log In"
-      submitLabel="Log In"
+      title="Log in"
+      submitLabel="Log in"
       mode="login"
       onSubmit={handleSubmit}
     />

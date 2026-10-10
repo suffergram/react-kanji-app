@@ -6,7 +6,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { TextInput } from '../../shared/text-input/text-input';
 import { RootState } from '../../../types/root-state';
 import { handleClearErrorAuth } from '../../../state/auth-action-creators';
-import { LocationType } from '../../../types/location-state';
+import { LocationState } from '../../../types/location-state';
 import {
   Card,
   ErrorMessage,
@@ -47,7 +47,7 @@ export function AuthForm({
     []
   );
 
-  const state = location.state as LocationType | null;
+  const state = location.state as LocationState | null;
 
   if (authState.status === 'authenticated') {
     const from = state?.from ?? '/';
@@ -107,14 +107,14 @@ export function AuthForm({
           <SwitchText>
             Don&apos;t have an account?{' '}
             <SwitchLink to="/register" state={state}>
-              Sign Up
+              Sign up
             </SwitchLink>
           </SwitchText>
         ) : (
           <SwitchText>
             Already have an account?{' '}
             <SwitchLink to="/login" state={state}>
-              Log In
+              Log in
             </SwitchLink>
           </SwitchText>
         )}
