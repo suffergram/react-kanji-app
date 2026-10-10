@@ -77,4 +77,10 @@ export const UserServices = {
       await sendJson('PATCH', url, { displayName })
     );
   },
+  changePassword: async (currentPassword: string, newPassword: string) => {
+    const url = `${HOST}/users/me/password`;
+    return processResponse<void>(
+      await sendJson('PATCH', url, { currentPassword, newPassword })
+    );
+  },
 };
