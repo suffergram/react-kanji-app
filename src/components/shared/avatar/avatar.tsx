@@ -1,6 +1,6 @@
 import { UserType } from '../../../types/user-type';
 import { getDisplayName } from '../../../util/get-display-name';
-import { StyledAvatar } from './style';
+import { AvatarImage, StyledAvatar } from './style';
 
 type AvatarProps = {
   user: UserType;
@@ -14,7 +14,7 @@ export function Avatar({ user, size = 2 }: AvatarProps) {
 
   return (
     <StyledAvatar $size={size} $hue={getHue(user.id)} aria-hidden="true">
-      {initial}
+      {user.avatarUrl ? <AvatarImage src={user.avatarUrl} alt="" /> : initial}
     </StyledAvatar>
   );
 }
