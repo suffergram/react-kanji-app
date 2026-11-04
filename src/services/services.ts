@@ -95,4 +95,18 @@ export const UserServices = {
       await sendJson('DELETE', url, { currentPassword })
     );
   },
+  uploadAvatar: async (avatar: File) => {
+    const url = `${HOST}/users/me/avatar`;
+    return processResponse<UserType>(
+      await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': avatar.type },
+        body: avatar,
+      })
+    );
+  },
+  deleteAvatar: async () => {
+    const url = `${HOST}/users/me/avatar`;
+    return processResponse<UserType>(await sendJson('DELETE', url));
+  },
 };

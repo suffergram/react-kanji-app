@@ -89,6 +89,28 @@ export const StyledButton = styled.button<{
             top: 0.125rem;
           }
         `;
+      case 'ghost':
+        return css`
+          color: #c5c5ce;
+          background-color: transparent;
+          border: 1px solid rgba(197, 197, 206, 0.25);
+          box-shadow: none;
+          transition: background-color 150ms ease, border-color 150ms ease;
+
+          &:hover:not(:disabled) {
+            background-color: rgba(197, 197, 206, 0.08);
+            border-color: rgba(197, 197, 206, 0.45);
+          }
+
+          &:active:not(:disabled) {
+            background-color: rgba(197, 197, 206, 0.12);
+          }
+
+          &:focus-visible {
+            outline: 1px solid #aab;
+            outline-offset: 2px;
+          }
+        `;
       case 'danger':
         return css`
           color: white;

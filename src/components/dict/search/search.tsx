@@ -61,6 +61,7 @@ export function Search() {
   return (
     <form onSubmit={handleFormSubmit}>
       <TextInput
+        size="small"
         width="24rem"
         placeholder="English, Japanese, Romaji, words or kanji"
         value={search}

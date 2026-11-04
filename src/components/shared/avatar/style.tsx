@@ -15,4 +15,12 @@ export const StyledAvatar = styled.span<{ $size: number; $hue: number }>`
   font-weight: bold;
   line-height: 1;
   user-select: none;
+  overflow: hidden;
+`;
+
+export const AvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 `;

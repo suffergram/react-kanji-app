@@ -2,7 +2,7 @@ import { StyledButton } from './style';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   value: string;
-  variant?: 'primary' | 'secondary' | 'danger';
+  variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
   success?: boolean;
 };
 
