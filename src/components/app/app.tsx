@@ -20,12 +20,14 @@ import { RegisterPage } from '../../pages/register-page/register-page';
 import { RequireAuth } from '../auth/require-auth/require-auth';
 import { DashboardPage } from '../../pages/dashboard-page/dashboard-page';
 import { SettingsPage } from '../../pages/settings-page/settings-page';
+import { PilotLessonPage } from '../../pages/pilot-lesson-page/pilot-lesson-page';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<HomePage />} />
       <Route path="learn" element={<LearnPage />} />
+      <Route path="learn/pilot-nature" element={<PilotLessonPage />} />
       <Route path="dict" element={<DictPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />

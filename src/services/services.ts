@@ -3,6 +3,7 @@ import { KanjiType } from '../types/kanji-type';
 import { LessonsDTO } from '../types/lessons-dto';
 import { SearchDTO } from '../types/search-dto';
 import { UserType } from '../types/user-type';
+import { VocabLessonDTO } from '../types/vocab-lesson-dto';
 import { processResponse } from '../util/process-response';
 
 export type SearchRequestParams = {
@@ -43,6 +44,10 @@ export const LearnServices = {
   getLessons: async (): Promise<LessonsDTO> => {
     const url = `${HOST}/lessons`;
     return processResponse<LessonsDTO>(await fetch(url));
+  },
+  getPilotLesson: async (): Promise<VocabLessonDTO> => {
+    const url = `${HOST}/lessons/pilot-nature`;
+    return processResponse<VocabLessonDTO>(await fetch(url));
   },
 };
 
