@@ -121,6 +121,21 @@ export const Meaning = styled.p`
   overflow-wrap: anywhere;
 `;
 
+export const MeaningAnswer = styled.div`
+  min-height: 5.5rem;
+  box-sizing: border-box;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.625rem;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+`;
+
 export const Note = styled.aside`
   padding: 1rem 1.125rem;
   border-left: 2px solid #657383;

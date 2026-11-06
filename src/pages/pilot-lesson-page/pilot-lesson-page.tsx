@@ -6,12 +6,23 @@ import { Loader } from '../../components/shared/loader/loader';
 import { TextInput } from '../../components/shared/text-input/text-input';
 import * as S from './style';
 
-type PracticePhase = 'learn' | 'practice' | 'complete' | 'retry';
+type PracticePhase =
+  | 'learn'
+  | 'practice'
+  | 'complete'
+  | 'retry'
+  | 'meaning'
+  | 'meaning-retry';
 
 type PracticeResult = {
   vocabId: number;
   answer: string;
   isCorrect: boolean;
+};
+
+type MeaningResult = {
+  vocabId: number;
+  remembered: boolean;
 };
 
 export function PilotLessonPage() {
@@ -27,6 +38,14 @@ export function PilotLessonPage() {
   const [retryIds, setRetryIds] = useState<number[]>([]);
   const [hasRetried, setHasRetried] = useState(false);
   const [retryResults, setRetryResults] = useState<PracticeResult[]>([]);
+  const [meaningIndex, setMeaningIndex] = useState(0);
+  const [isMeaningRevealed, setIsMeaningRevealed] = useState(false);
+  const [meaningResults, setMeaningResults] = useState<MeaningResult[]>([]);
+  const [meaningRetryIds, setMeaningRetryIds] = useState<number[]>([]);
+  const [hasMeaningRetried, setHasMeaningRetried] = useState(false);
+  const [meaningRetryResults, setMeaningRetryResults] = useState<
+    MeaningResult[]
+  >([]);
 
   const answerInputRef = useRef<HTMLInputElement>(null);
 
@@ -96,6 +115,19 @@ export function PilotLessonPage() {
   const isLastPractice = practiceIndex === practiceLength - 1;
 
   const mistakes = results.filter((result) => !result.isCorrect);
+  const meaningMistakes = meaningResults.filter((result) => !result.remembered);
+
+  const isMeaningRetry = phase === 'meaning-retry';
+
+  const meaningWord = isMeaningRetry
+    ? lesson.items.find(
+        (item) => item.vocabId === meaningRetryIds[meaningIndex]
+      )
+    : lesson.items[meaningIndex];
+
+  const meaningLength = isMeaningRetry
+    ? meaningRetryIds.length
+    : lesson.items.length;
 
   const handleClickBack = () =>
     setCurrentIndex((index) => Math.max(0, index - 1));
@@ -137,7 +169,12 @@ export function PilotLessonPage() {
     if (isCorrect === null) return;
 
     if (isLastPractice) {
-      setPhase('complete');
+      if (phase === 'practice') {
+        setPhase('meaning');
+      }
+      if (phase === 'retry') {
+        setPhase('complete');
+      }
     } else {
       setPracticeIndex((value) => value + 1);
       setAnswer('');
@@ -152,6 +189,47 @@ export function PilotLessonPage() {
     setIsCorrect(null);
     setPhase('retry');
     setHasRetried(true);
+  };
+
+  const handleMeaningAnswer = (remembered: boolean) => {
+    if (!isMeaningRevealed || !meaningWord) return;
+
+    if (phase === 'meaning') {
+      setMeaningResults((previous) => [
+        ...previous,
+        {
+          vocabId: meaningWord.vocabId,
+          remembered,
+        },
+      ]);
+    }
+
+    if (phase === 'meaning-retry') {
+      setMeaningRetryResults((previous) => [
+        ...previous,
+        {
+          vocabId: meaningWord.vocabId,
+          remembered,
+        },
+      ]);
+    }
+
+    if (meaningIndex === meaningLength - 1) {
+      setPhase('complete');
+      return;
+    }
+
+    setMeaningIndex((previous) => previous + 1);
+    setIsMeaningRevealed(false);
+  };
+
+  const handleMeaningRetryClick = () => {
+    const meaningRetryIds = meaningMistakes.map((mistake) => mistake.vocabId);
+    setMeaningRetryIds(meaningRetryIds);
+    setMeaningIndex(0);
+    setIsMeaningRevealed(false);
+    setHasMeaningRetried(true);
+    setPhase('meaning-retry');
   };
 
   if (phase === 'practice' || phase === 'retry') {
@@ -233,6 +311,80 @@ export function PilotLessonPage() {
     );
   }
 
+  if (phase === 'meaning' || phase === 'meaning-retry') {
+    if (!meaningWord) return <div>Meaning practice word not found</div>;
+    return (
+      <S.Page>
+        <S.Header>
+          <S.Eyebrow>{lesson.title}</S.Eyebrow>
+          <h1>{isMeaningRetry ? 'Practise meanings' : 'Meaning practice'}</h1>
+          <S.Subtitle>
+            Recall the meaning, reveal the answer, then tell us how it went.
+          </S.Subtitle>
+        </S.Header>
+        <S.ProgressRow>
+          <S.Progress
+            aria-label="Meaning practice progress"
+            max={meaningLength}
+            value={meaningIndex + 1}
+          />
+          <span>
+            Word {meaningIndex + 1} / {meaningLength}
+          </span>
+        </S.ProgressRow>
+        <S.Card>
+          <S.WordBlock>
+            <S.Eyebrow>What does this word mean?</S.Eyebrow>
+            <S.Word lang="ja">{meaningWord.kanji}</S.Word>
+          </S.WordBlock>
+          <S.MeaningAnswer role="status" aria-live="polite">
+            {isMeaningRevealed ? (
+              <>
+                <S.Eyebrow>Meaning</S.Eyebrow>
+                <S.Meaning>{meaningWord.meaning}</S.Meaning>
+              </>
+            ) : (
+              <S.Subtitle>
+                Try to remember before revealing the answer.
+              </S.Subtitle>
+            )}
+          </S.MeaningAnswer>
+          {isMeaningRevealed ? (
+            <>
+              <S.Subtitle>
+                Did you remember this meaning before you revealed it?
+              </S.Subtitle>
+              <S.Actions>
+                <S.ActionButton
+                  type="button"
+                  variant="ghost"
+                  value="Didn't remember"
+                  onClick={() => handleMeaningAnswer(false)}
+                />
+                <S.ActionButton
+                  type="button"
+                  variant="primary"
+                  value="Remembered"
+                  onClick={() => handleMeaningAnswer(true)}
+                />
+              </S.Actions>
+            </>
+          ) : (
+            <S.Actions>
+              <S.Subtitle>No need to type a translation.</S.Subtitle>
+              <S.ActionButton
+                type="button"
+                variant="primary"
+                value="Show meaning"
+                onClick={() => setIsMeaningRevealed(true)}
+              />
+            </S.Actions>
+          )}
+        </S.Card>
+      </S.Page>
+    );
+  }
+
   if (phase === 'complete') {
     return (
       <S.Page>
@@ -263,6 +415,31 @@ export function PilotLessonPage() {
                 <S.Subtitle>Readings recalled on the second try</S.Subtitle>
               </S.Stat>
             )}
+            <S.Stat>
+              <S.Eyebrow>Meaning recall</S.Eyebrow>
+              <strong>
+                {meaningResults.filter((result) => result.remembered).length}
+                {' / '}
+                {lesson.items.length}
+              </strong>
+              <S.Subtitle>Meanings you reported remembering</S.Subtitle>
+            </S.Stat>
+            {hasMeaningRetried &&
+              meaningRetryResults.length === meaningRetryIds.length && (
+                <S.Stat>
+                  <S.Eyebrow>Meaning recall · second try</S.Eyebrow>
+                  <strong>
+                    {
+                      meaningRetryResults.filter((result) => result.remembered)
+                        .length
+                    }{' '}
+                    / {meaningRetryIds.length}
+                  </strong>
+                  <S.Subtitle>
+                    Meanings you reported remembering on the second try
+                  </S.Subtitle>
+                </S.Stat>
+              )}
           </S.Stats>
           {mistakes.length === 0 ? (
             <S.Feedback $correct>
@@ -294,6 +471,39 @@ export function PilotLessonPage() {
                   </S.Mistake>
                 );
               })}
+            </S.Mistakes>
+          )}
+          {meaningMistakes.length > 0 && (
+            <S.Mistakes>
+              <h2>Meanings to revisit</h2>
+              <S.Subtitle>
+                Words you marked as not remembered on the first try.
+              </S.Subtitle>
+              {meaningMistakes.map((mistake) => {
+                const lessonItem = lesson.items.find(
+                  (item) => item.vocabId === mistake.vocabId
+                );
+                if (!lessonItem) return null;
+                return (
+                  <S.Mistake key={lessonItem.vocabId}>
+                    <span lang="ja">{lessonItem.kanji}</span>
+                    <div>
+                      <S.PreviousAnswer>Meaning</S.PreviousAnswer>
+                      <span>{lessonItem.meaning}</span>
+                    </div>
+                  </S.Mistake>
+                );
+              })}
+              {!hasMeaningRetried && (
+                <S.Actions>
+                  <S.Subtitle>Give these meanings one more try.</S.Subtitle>
+                  <S.ActionButton
+                    variant="primary"
+                    value="Practise meanings"
+                    onClick={handleMeaningRetryClick}
+                  />
+                </S.Actions>
+              )}
             </S.Mistakes>
           )}
           <S.Actions>
